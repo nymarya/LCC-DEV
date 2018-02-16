@@ -16,6 +16,10 @@ class CreateTablePlanoSaude extends Migration
         Schema::create('planos_saude', function (Blueprint $table){
             $table->increments('id');
             $table->string('nome');
+            $table->float('motora_UTI');
+            $table->float('motora_APT');
+            $table->float('resp_UTI');
+            $table->float('resp_APT');
             $table->timestamps();
         });
     }

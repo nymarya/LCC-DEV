@@ -1,12 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class PlanoSaude extends Model
 {
     protected $fillable = [
-        'nome'
+        'nome', 'motora_UTI', 'motora_APT', 'resp_UTI', 'resp_APT',
     ];
 }
