@@ -66,18 +66,13 @@
     </div>
 @endsection
 @push('stylesheets')
-<link rel="stylesheet" type="text/css" href="/plugins/dataTable/css/dataTables.bootstrap.min.css" as="style">
-<link rel="stylesheet" type="text/css" href="/plugins/dataTable/css/responsive.bootstrap.min.css" as="style">
+<link rel="stylesheet" type="text/css" href="{{ asset('bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}" as="style">
 @endpush
 
 @push('scripts')
-<script type="text/javascript" charset="utf8" src="/plugins/dataTable/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" charset="utf8" src="/plugins/dataTable/js/dataTables.bootstrap.min.js"></script>
-<script type="text/javascript" charset="utf8" src="/plugins/dataTable/js/dataTables.responsive.min.js"></script>
-<script type="text/javascript" charset="utf8" src="/plugins/dataTable/js/responsive.bootstrap.min.js"></script>
-<script type="text/javascript" charset="utf8" src="/plugins/dataTable/js/dataTables.buttons.min.js"></script>
-<script type="text/javascript" charset="utf8" src="/plugins/dataTable/js/buttons.flash.min.js"></script>
-<script type="text/javascript" charset="utf8" src="/plugins/dataTable/js/jszip.min.js"></script>
+<script type="text/javascript" charset="utf8" src="{{ asset('bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+<script type="text/javascript" charset="utf8" src="{{ asset('bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+<script src="{{ asset ("bower_components/jquery-slimscroll/jquery.slimscroll.min.js") }}"></script>
 
 <script type="text/javascript">
     $(document).ready(function() {
