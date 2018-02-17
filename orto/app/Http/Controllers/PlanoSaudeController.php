@@ -8,9 +8,28 @@ use Illuminate\Support\Facades\Response;
 
 class PlanoSaudeController extends Controller
 {
+    protected $request;
+
+    public function __construct(Request $request)
+    {
+        $this->middleware('role:administrador');
+        $this->request = $request;
+    }
+
     public function create()
     {
         return Response::view('plano_saude.create');
+    }
+
+    public function store()
+    {
+        $this->validate($this->request, [
+            'nome' => [
+                'required',
+                'max:255',
+            ],
+        ]);
+
     }
 
     public function index()

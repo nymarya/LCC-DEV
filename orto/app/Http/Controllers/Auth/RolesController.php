@@ -30,8 +30,21 @@ class RolesController extends Controller
     {
         $perfis = $request->user()->perfis()->with('papel')->get();
 
+        //Verificação se há apenas um perfil e redirecionamento para página inicial
+        if (count($perfis) == 1) {
+            PerfilFacade::definir($perfis->first());
 
+            return Redirect::to('/');
+            //Caso tenha mais de um perfil e apenas um ativo, redireciona pra pagina inicial
+            //com o perfil ativo
+        } elseif (count($perfis) > 1) {
+            if ($perfis->count('deleted_at') == 1) {
+                PerfilFacade::definir($perfis->where('deleted_at', null)->first());
 
+                return Redirect::to('/');
+            }
+        }
+        
         return view('auth.roles.select', [
             'perfis' => $request->user()->perfis()
                 ->withTrashed()->get(),
