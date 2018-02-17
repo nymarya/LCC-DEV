@@ -18,6 +18,7 @@ class CreateUsuariosTable extends Migration
             $table->string('cpf', 11)->unique()->nullable();
             $table->string('rg', 10)->nullable();
             $table->string('nome');
+            $table->string('email')->unique()->nullable();
             $table->timestamps();
             $table->softDeletes();
 
