@@ -82,7 +82,7 @@
                             </div>
                             <div class="required col-md-6 form-group{{ $errors->has('resp_APT') ? ' has-error' : '' }}">
                                 <label for="resp_APT">Apartamento</label>
-                                <input type="text" id="resp_APT" name="resp_APT" value="{{ old('resp_UTI', $plano->resp_UTI) }}"
+                                <input type="text" id="resp_APT" name="resp_APT" value="{{ old('resp_APT', $plano->resp_APT) }}"
                                        maxlength="255" class="form-control">
 
                                 @if ($errors->has('resp_APT'))
@@ -104,3 +104,14 @@
         </div>
     </div>    &nbsp;
 @endsection
+@push('scripts')
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.13.4/jquery.mask.min.js"></script>
+
+    <script>
+        $("#motora_UTI").mask("##0.00", {reverse: true});
+        $("#motora_APT").mask("##0.00", {reverse: true});
+        $("#resp_UTI").mask("##0.00", {reverse: true});
+        $("#resp_APT").mask("##0.00", {reverse: true});
+    </script>
+@endpush
