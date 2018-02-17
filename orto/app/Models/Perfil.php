@@ -48,12 +48,11 @@ class Perfil extends Model
      */
     public function papel()
     {
-
         if (empty($class = $this->tipo)) {
+
             return $this->morphTo(null, 'tipo', 'id')
                 ->withoutGlobalScopes();
         }
-
         return $this->hasOne($this->getActualClassNameForMorph($class), 'id')
             ->withoutGlobalScopes();
     }

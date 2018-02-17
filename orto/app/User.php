@@ -34,11 +34,11 @@ class User extends Authenticatable
     {
         parent::boot();
 
-        parent::deleting(function (Usuario $usuario) {
+        parent::deleting(function (User $usuario) {
             $usuario->perfis()->get()->each->delete();
         });
 
-        parent::restoring(function (Usuario $usuario) {
+        parent::restoring(function (User $usuario) {
             $usuario->perfis()
                 ->onlyTrashed()->get()->each->restore();
         });

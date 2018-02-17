@@ -176,6 +176,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\RolesServiceProvider::class,
+        App\Providers\ValidatorServiceProvider::class,
+        App\Providers\CarbonLanguageServiceProvider::class,
 
     ],
 
