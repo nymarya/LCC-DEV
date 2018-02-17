@@ -22,8 +22,8 @@ class AdministradorController extends Controller
      */
     protected $views = [
         'index' => 'papeis.administrador.index',
-        'create' => 'papeis.create',
-        'show' => 'papeis.show',
+        'create' => 'papeis.administrador.create',
+        'show' => 'papeis.administrador.show',
     ];
 
     /**
