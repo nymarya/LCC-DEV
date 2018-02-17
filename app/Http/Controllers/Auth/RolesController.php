@@ -44,7 +44,7 @@ class RolesController extends Controller
                 return Redirect::to('/');
             }
         }
-        
+
         return view('auth.roles.select', [
             'perfis' => $request->user()->perfis()
                 ->withTrashed()->get(),
