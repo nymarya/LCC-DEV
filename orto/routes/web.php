@@ -15,6 +15,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::group(['namespace' => 'Auth'], function () {
+    Route::get('papel', 'RolesController@index')->name('perfis:selecionar');
+    Route::post('papel', 'RolesController@update')->name('perfis:trocar');
+
+});
+
 Auth::routes();
 
 Route::group(['middleware' => ['auth', 'role']], function () {
