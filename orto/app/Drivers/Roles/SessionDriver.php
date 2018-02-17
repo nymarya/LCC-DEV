@@ -105,6 +105,7 @@ class SessionDriver
         if (! $this->guarda->check()) {
             return;
         }
+
         $id = $this->sessao->get($this->getNome());
         $this->perfil = null;
         if (! is_null($id)) {
