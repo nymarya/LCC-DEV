@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Perfil;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -109,7 +110,7 @@ class User extends Authenticatable
      */
     public function perfis()
     {
-        return $this->hasMany(Perfil::class)->orderBy('tipo');
+        return $this->hasMany(Perfil::class, 'usuario_id')->orderBy('tipo');
     }
 
 }
