@@ -48,5 +48,5 @@
     </div>
 </div>
 @push('stylesheets')
-    <LINK rel="stylesheet" href="{{ asset('css/style.css') }}" >
+
 @endpush

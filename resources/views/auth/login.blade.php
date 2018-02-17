@@ -13,11 +13,12 @@
 
     <title>@yield('title', 'FisioCENTRO') | {{ config('app.name', 'FisioCENTRO') }}</title>
     <!-- Styles -->
-    <link href="{{asset('/css/app.css')}}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-    <link rel="stylesheet" href="{{asset('/css/AdminLTE.min.css')}}">
+    <link rel="stylesheet" href="{{asset('bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('bower_components/font-awesome/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{asset('bower_components/Ionicons/css/ionicons.min.css')}}">
+    <link rel="stylesheet" href="{{asset('dist/css/AdminLTE.min.css')}}">
+    <link rel="stylesheet" href="{{asset('plugins/iCheck/square/blue.css')}}">
+
 
 @stack('stylesheets')
 
@@ -71,5 +72,19 @@
     </div>
     <!-- /.login-box-body -->
 </div>
-<script src="{{asset('/js/app.js')}}"></script>
+<!-- jQuery 3 -->
+<script src="{{ asset('bower_components/jquery/dist/jquery.min.js') }}"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="{{ asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<!-- iCheck -->
+<script src="{{ asset('plugins//iCheck/icheck.min.js') }}"></script>
+<script>
+    $(function () {
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' // optional
+        });
+    });
+</script>
 </body>
