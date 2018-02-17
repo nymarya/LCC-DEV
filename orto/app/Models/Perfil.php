@@ -2,11 +2,9 @@
 
 namespace App\Models;
 
-use OwenIt\Auditing\Auditable;
-use App\Scopes\InstituicaoScope;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
 
 class Perfil extends Model
 {
@@ -42,7 +40,7 @@ class Perfil extends Model
      */
     public function usuario()
     {
-        return $this->belongsTo(Usuario::class);
+        return $this->belongsTo(User::class);
     }
 
     /**

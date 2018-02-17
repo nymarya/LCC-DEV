@@ -3,28 +3,18 @@
 namespace App\Http\Controllers\Roles;
 
 use App\Models\Roles\Administrador;
+use App\User;
 use Carbon\Carbon;
 use App\Models\Perfil;
-use GuzzleHttp\Client;
-use App\Models\Usuario;
 use App\Models\Endereco;
 use App\Models\Escolaridade;
 use Illuminate\Http\Request;
-use GuzzleHttp\RequestOptions;
-use App\Models\Foundation\Pais;
 use Illuminate\Validation\Rule;
-use App\Models\Foundation\Etnia;
-use App\Models\Foundation\Genero;
 use App\Facades\Perfil as Profile;
-use App\Mail\AlertarUsuarioCriado;
-use App\Mail\AlertaNovoPerfilCriado;
-use Illuminate\Support\Facades\Mail;
-use App\Models\Foundation\PovoIndigena;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Database\Eloquent\Builder;
-use App\Models\Foundation\UnidadeFederativa;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use App\Http\Controllers\Controller as BaseController;
 
@@ -69,12 +59,12 @@ abstract class Controller extends BaseController
         return [
             'cpf' => [
                 'required', 'numeric', 'digits:11', 'cpf',
-                Rule::unique('usuarios')->whereNull('deleted_at'),
+                Rule::unique('users')->whereNull('deleted_at'),
             ],
             'rg' => ['required', 'string', 'max:30'],
             'nome' => ['required', 'max:255'],
             'email' => [
-                'nullable', 'email', Rule::unique('usuarios')->whereNull('deleted_at'),
+                'nullable', 'email', Rule::unique('users')->whereNull('deleted_at'),
             ],
         ];
     }
@@ -176,7 +166,7 @@ abstract class Controller extends BaseController
      */
     public function store(Request $request)
     {
-        $usuario = Usuario::when(
+        $usuario = User::when(
             count($keys = $this->getUniqueKeysForRequest($request)),
             function (Builder $query) use ($keys) {
                 foreach ($keys as $key => $value) {
@@ -222,7 +212,7 @@ abstract class Controller extends BaseController
                 }
             }
 
-            $usuario = Usuario::create(
+            $usuario = User::create(
                 $request->only($this->getKeysFromRequest($request)));
         } else {
             $this->validate($request, $this->rulesFromRole($request), $this->messagesFromRole($request));

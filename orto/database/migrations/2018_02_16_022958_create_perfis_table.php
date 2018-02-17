@@ -20,7 +20,7 @@ class CreatePerfisTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('usuario_id')->references('id')->on('usuarios');
+            $table->foreign('usuario_id')->references('id')->on('users');
         });
     }
 
