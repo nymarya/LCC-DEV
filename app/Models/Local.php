@@ -20,6 +20,6 @@ class Local extends Model
 
     public function vinculos()
     {
-        $this->hasMany(Vinculo::class, 'local_id');
+        return $this->hasMany(Vinculo::class, 'local_id');
     }
 }

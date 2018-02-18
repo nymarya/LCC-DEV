@@ -17,11 +17,16 @@ class Vinculo extends Model
 
     public function local()
     {
-        $this->belongsTo(Local::class);
+        return $this->belongsTo(Local::class);
     }
 
     public function paciente()
     {
-        $this->belongsTo(Paciente::class);
+        return $this->belongsTo(Paciente::class);
+    }
+
+    public function planoSaude()
+    {
+        return $this->belongsTo(PlanoSaude::class);
     }
 }

@@ -46,7 +46,7 @@ class Paciente extends Model
 
     public function vinculos()
     {
-        $this->hasMany(Vinculo::class, 'paciente_id');
+        return $this->hasMany(Vinculo::class, 'paciente_id');
     }
 
 }
