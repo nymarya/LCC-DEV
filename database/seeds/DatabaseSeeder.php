@@ -14,5 +14,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PlanoSaudeSeeder::class);
         $this->call(PapeisTableSeeder::class);
         $this->call(AdminSeeder::class);
+        $this->call(LocalSeeder::class);
     }
 }

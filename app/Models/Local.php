@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Vinculo;
 use Illuminate\Database\Eloquent\Model;
 
 class Local extends Model
@@ -12,4 +13,9 @@ class Local extends Model
      * @var string
      */
     protected $table = 'locais';
+
+    public function vinculo()
+    {
+        $this->hasMany(Vinculo::class);
+    }
 }

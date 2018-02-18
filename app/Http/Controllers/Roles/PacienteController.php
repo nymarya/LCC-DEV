@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Roles;
 
 use App\Models\Roles\Paciente;
+use App\Models\Vinculo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -76,9 +77,13 @@ class PacienteController extends Controller
     protected function rulesFromRole(Request $request)
     {
         return array_merge(parent::rulesFromRole($request), [
-            'registro'=> [
-                'required','numeric', 'unique:pacientes,registro'
-            ],
+            'registro'=> ['required','numeric', 'unique:pacientes,registro'],
+            'admissao' => ['required'],
+            'quant_mot' => ['required', 'numeric'],
+            'quant_resp' => ['required', 'numeric'],
+            'plano_saude_id' => ['required', 'numeric', 'exists:planos_saude,id'],
+            'local_id' => ['required', 'numeric', 'exists:planos_saude,id'],
+            //'paciente_id' => ['required', 'numeric', 'exists:pacientes,id']
         ]);
     }
 
@@ -103,6 +108,13 @@ class PacienteController extends Controller
 
         $paciente = Paciente::create(
             $request->only('registro')
+        );
+
+        $request->request->add(['paciente_id' => $paciente->id]);
+
+        Vinculo::create(
+            $request->only('admissao', 'alta', 'quant_mot', 'quant_resp',
+                'plano_saude_id', 'local_id', 'paciente_id' )
         );
 
         return redirect()->route('pacientes.index')

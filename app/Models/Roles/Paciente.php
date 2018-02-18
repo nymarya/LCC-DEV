@@ -2,6 +2,8 @@
 
 namespace App\Models\Roles;
 
+use App\Models\PlanoSaude;
+use App\Vinculo;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\Papel;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -41,5 +43,15 @@ class Paciente extends Model
     protected $dates = [
         'deleted_at',
     ];
+
+    public function planoSaude()
+    {
+        $this->hasOne(PlanoSaude::class);
+    }
+
+    public function vinculos()
+    {
+        $this->hasMany(Vinculo::class);
+    }
 
 }

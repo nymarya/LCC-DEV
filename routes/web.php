@@ -34,4 +34,5 @@ Route::group(['namespace' => 'Roles'], function (){
 
 Route::prefix('api')->group(function (){
     Route::get('planos_saude', 'PlanoSaudeController@json')->name('api.planos_saude');
+    Route::get('locais', 'LocalController@json')->name('api.locais');
 });
