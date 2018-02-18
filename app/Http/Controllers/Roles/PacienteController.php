@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Roles;
 
 use App\Models\Roles\Paciente;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class PacienteController extends Controller
 {
@@ -50,8 +51,9 @@ class PacienteController extends Controller
      */
     protected function rules(Request $request)
     {
-        return array_add(parent::rules($request),
-            'registro', ['required', 'numeric']);
+        return array_merge(parent::rules($request),[
+                'registro' => ['required', 'numeric'],
+        ]);
     }
 
     /**
@@ -74,7 +76,9 @@ class PacienteController extends Controller
     protected function rulesFromRole(Request $request)
     {
         return array_merge(parent::rulesFromRole($request), [
-            'registro'=> ['required', 'numeric'],
+            'registro'=> [
+                'required','numeric', 'unique:pacientes,registro'
+            ],
         ]);
     }
 
@@ -91,6 +95,35 @@ class PacienteController extends Controller
             'tipo' => (new $type)->getTable(),
             'pacientes' => Paciente::orderBy('id')->get(),
         ]);
+    }
+
+    public function store(Request $request)
+    {
+        $this->validate($request, $this->rulesFromRole($request));
+
+        $paciente = Paciente::create(
+            $request->only('registro')
+        );
+
+        return redirect()->route('pacientes.index')
+            ->with('success', 'Paciente cadastrado com sucesso!');
+    }
+
+    public function edit($id)
+    {
+        return view('papeis.paciente.edit', [
+            'paciente' => Paciente::findOrFail($id)
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'plano_saude_id' => 'required|numeric|exists:planos_saude,id'
+        ]);
+
+        return Redirect::route('pacientes.index')
+            ->with('success', 'Paciente atualizado com sucesso!');
     }
 
 }
