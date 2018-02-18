@@ -6,7 +6,8 @@
 
 @push('stylesheets')
     <link href="{{ asset('bower_components/select2/dist/css/select2.css') }}" rel="stylesheet">
-    <link href="{{ asset('bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css') }}"
+          rel="stylesheet">
 @endpush
 
 @section('content')
@@ -21,7 +22,8 @@
                         <div class="row">
                             <div class="required col-md-6 form-group{{ $errors->has('registro') ? ' has-error' : '' }}">
                                 <label for="registro">Registro</label>
-                                <input type="number" id="registro" name="registro" value="{{ old('registro') }}" class="form-control">
+                                <input type="number" id="registro" name="registro" value="{{ old('registro') }}"
+                                       class="form-control">
 
                                 @if ($errors->has('registro'))
                                     <span class="help-block">
@@ -29,9 +31,23 @@
                                     </span>
                                 @endif
                             </div>
-                            <div class="required col-md-6 form-group{{ $errors->has('plano_saude_id') ? ' has-error' : '' }}">
+                            <div class="required col-md-6 form-group{{ $errors->has('nome') ? ' has-error' : '' }}">
+                                <label for="nome">Nome</label>
+                                <input type="text" id="nome" name="nome" value="{{ old('nome') }}"
+                                       class="form-control">
+
+                                @if ($errors->has('nome'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('nome') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="required col-md-4 form-group{{ $errors->has('plano_saude_id') ? ' has-error' : '' }}">
                                 <label for="plano_saude_id">Plano de Saude</label>
-                                <select id="plano_saude_id" class="form-control select2" name="plano_saude_id" width="100%">
+                                <select id="plano_saude_id" class="form-control select2" name="plano_saude_id"
+                                        width="100%">
                                 </select>
 
                                 @if ($errors->has('plano_saude_id'))
@@ -40,8 +56,6 @@
                                     </span>
                                 @endif
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="required col-md-4 form-group{{ $errors->has('admissao') ? ' has-error' : '' }}">
                                 <label>Admissão:</label>
 
@@ -57,10 +71,24 @@
                                     </span>
                                 @endif
                             </div>
+                            <div class="required col-md-4 form-group{{ $errors->has('local_id') ? ' has-error' : '' }}">
+                                <label for="local_id">Local do exame</label>
+                                <select id="local_id" class="form-control select2" name="local_id" width="100%">
+                                </select>
 
+                                @if ($errors->has('local_id'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('local_id') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+
+                        </div>
+                        <div class="row">
                             <div class="required col-md-4 form-group{{ $errors->has('quant_mot') ? ' has-error' : '' }}">
                                 <label for="quant_mot">Quantidade de Motoras</label>
-                                <input id="quant_mot" class="form-control select2" name="quant_mot" type="number" value="2">
+                                <input id="quant_mot" class="form-control select2" name="quant_mot" type="number"
+                                       value="2">
 
                                 @if ($errors->has('quant_mot'))
                                     <span class="help-block">
@@ -70,24 +98,12 @@
                             </div>
                             <div class="required col-md-4 form-group{{ $errors->has('quant_resp') ? ' has-error' : '' }}">
                                 <label for="quant_resp">Quantidade de respiratórias</label>
-                                <input id="quant_resp" class="form-control select2" name="quant_resp" type="number" value="1">
+                                <input id="quant_resp" class="form-control select2" name="quant_resp" type="number"
+                                       value="1">
 
                                 @if ($errors->has('quant_resp'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('quant_resp') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="required col-md-4 form-group{{ $errors->has('local_id') ? ' has-error' : '' }}">
-                                <label for="local_id">Local do exame</label>
-                                <select id="local_id" class="form-control select2" name="local_id" width="100%">
-                                </select>
-
-                                @if ($errors->has('local_id'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('local_id') }}</strong>
                                     </span>
                                 @endif
                             </div>

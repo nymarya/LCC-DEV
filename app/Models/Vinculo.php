@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Local;
+use App\Models\Roles\Paciente;
 use Illuminate\Database\Eloquent\Model;
 
 class Vinculo extends Model
@@ -17,5 +18,10 @@ class Vinculo extends Model
     public function local()
     {
         $this->belongsTo(Local::class);
+    }
+
+    public function paciente()
+    {
+        $this->belongsTo(Paciente::class);
     }
 }

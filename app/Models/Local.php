@@ -14,6 +14,10 @@ class Local extends Model
      */
     protected $table = 'locais';
 
+    protected $fillable = [
+        'nome'
+    ];
+
     public function vinculos()
     {
         $this->hasMany(Vinculo::class, 'local_id');

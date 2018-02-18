@@ -44,11 +44,6 @@ class Paciente extends Model
         'deleted_at',
     ];
 
-    public function planoSaude()
-    {
-        $this->hasOne(PlanoSaude::class);
-    }
-
     public function vinculos()
     {
         $this->hasMany(Vinculo::class, 'paciente_id');

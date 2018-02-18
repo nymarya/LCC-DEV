@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Roles;
 use App\Models\PlanoSaude;
 use App\Models\Roles\Paciente;
 use App\Models\Vinculo;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -80,11 +81,11 @@ class PacienteController extends Controller
         return array_merge(parent::rulesFromRole($request), [
             'registro'=> ['required','numeric', 'unique:pacientes,registro'],
             'admissao' => ['required'],
+            'nome' => ['required'],
             'quant_mot' => ['required', 'numeric'],
             'quant_resp' => ['required', 'numeric'],
             'plano_saude_id' => ['required', 'numeric', 'exists:planos_saude,id'],
             'local_id' => ['required', 'numeric', 'exists:planos_saude,id'],
-            //'paciente_id' => ['required', 'numeric', 'exists:pacientes,id']
         ]);
     }
 
@@ -95,8 +96,6 @@ class PacienteController extends Controller
      */
     public function index(Request $request)
     {
-        $paciente = Paciente::find(2);
-        dd($paciente->vinculos());
         $type = $this->getType();
 
         return view($this->views['index'], [
@@ -109,9 +108,12 @@ class PacienteController extends Controller
     {
         $this->validate($request, $this->rulesFromRole($request));
 
-        $paciente = Paciente::create(
-            $request->only('registro')
-        );
+        $usuario = User::create([
+            'name' => $request->only('nome')['nome']
+        ]);
+
+        $paciente = $usuario->perfis()->create(['tipo' => $this->type])->papel()->create(
+            $this->getRoleDataFromRequest($request));
 
         $request->request->add(['paciente_id' => $paciente->id]);
 
