@@ -74,12 +74,12 @@ class User extends Authenticatable
      * Get the CPF for the user.
      *
      * @return string
-     */
+
     public function getCpfAttribute($value)
     {
         return mask($value, '###.###.###-##');
     }
-
+     */
     /**
      * Get the RG for the user.
      *
