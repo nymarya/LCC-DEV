@@ -26,4 +26,7 @@ Auth::routes();
 Route::group(['middleware' => ['auth', 'role']], function () {
     Route::get('/', 'HomeController@index');
     Route::resource('planos', 'PlanoSaudeController');
+    Route::group(['namespace' => 'Roles'], function () {
+        Route::resource('administradores', 'AdministradorController');
+    });
 });
