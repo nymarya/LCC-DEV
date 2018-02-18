@@ -3,7 +3,7 @@
 namespace App\Models\Roles;
 
 use App\Models\PlanoSaude;
-use App\Vinculo;
+use App\Models\Vinculo;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\Papel;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -51,7 +51,7 @@ class Paciente extends Model
 
     public function vinculos()
     {
-        $this->hasMany(Vinculo::class);
+        $this->hasMany(Vinculo::class, 'paciente_id');
     }
 
 }

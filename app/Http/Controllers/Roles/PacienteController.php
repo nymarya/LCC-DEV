@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Roles;
 
+use App\Models\PlanoSaude;
 use App\Models\Roles\Paciente;
 use App\Models\Vinculo;
 use Illuminate\Http\Request;
@@ -94,6 +95,8 @@ class PacienteController extends Controller
      */
     public function index(Request $request)
     {
+        $paciente = Paciente::find(2);
+        dd($paciente->vinculos());
         $type = $this->getType();
 
         return view($this->views['index'], [

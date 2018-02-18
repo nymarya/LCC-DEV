@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Vinculo;
+use App\Models\Vinculo;
 use Illuminate\Database\Eloquent\Model;
 
 class PlanoSaude extends Model
@@ -20,6 +20,6 @@ class PlanoSaude extends Model
 
     public function vinculos()
     {
-        $this->hasMany(Vinculo::class);
+        $this->hasMany(Vinculo::class, 'plano_saude_id');
     }
 }
