@@ -16,7 +16,6 @@
 @endsection
 
 @section('content')
-
     <div class="row">
         <div class="col-md-12">
             <form id="form" action="{{ route($rota) }}" method="post" enctype="multipart/form-data">
@@ -27,7 +26,7 @@
                     <div class="box-header">Identificação</div>
                     <div class="box-body">
                         <div class="row">
-                            <div class="required col-md-12 form-group{{ $errors->has('cpf') ? ' has-error' : '' }}">
+                            <div class="required col-md-6 form-group{{ $errors->has('cpf') ? ' has-error' : '' }}">
                                 <label for="cpf">CPF</label>
                                 <input type="text" id="cpf" name="cpf" value="{{ old('cpf') }}" maxlength="15" class="form-control">
 
@@ -37,9 +36,19 @@
                                     </span>
                                 @endif
                             </div>
+                            <div class="required col-md-6 form-group{{ $errors->has('rg') ? ' has-error' : '' }}">
+                                <label for="rg">Identidade</label>
+                                <input type="text" id="rg" name="rg" value="{{ old('rg') }}" maxlength="30" class="form-control">
+
+                                @if ($errors->has('rg'))
+                                    <span class="help-block">
+                                                <strong>{{ $errors->first('rg') }}</strong>
+                                            </span>
+                                @endif
+                            </div>
 
                         </div>
-                        <div class="row hidden" id="identificacao">
+                        <div class="row" id="identificacao">
                             <div class="required col-md-12 form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                 <label for="name">Nome</label>
                                 <input type="text" id="name" name="name" value="{{ old('name') }}" maxlength="255" class="form-control" required>
@@ -50,35 +59,37 @@
                                     </span>
                                 @endif
                             </div>
-                            <div class="required col-md-12 form-group{{ $errors->has('rg') ? ' has-error' : '' }}">
-                                <label for="rg">Identidade</label>
-                                <input type="text" id="rg" name="rg" value="{{ old('rg') }}" maxlength="30" class="form-control">
-
-                                @if ($errors->has('rg'))
-                                    <span class="help-block">
-                                                <strong>{{ $errors->first('rg') }}</strong>
-                                            </span>
-                                @endif
-                            </div>
-                            <div class="col-md-12 form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <div class="col-md-4 form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                 <label for="email">Email</label>
                                 <input type="text" id="email" name="email" value="{{ old('email') }}" class="form-control">
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
-                                                <strong>{{ $errors->first('email') }}</strong>
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                            <div class="col-md-4 form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                                <label for="password">Senha</label>
+                                <input type="password" id="password" name="password" value="{{ old('password') }}" class="form-control">
+
+                                @if ($errors->has('password'))
+                                    <span class="help-block">
+                                                <strong>{{ $errors->first('password') }}</strong>
                                             </span>
                                 @endif
+                            </div>
+                            <div class="col-md-4 form-group">
+                                <label for="password-confirm">Confirme a senha</label>
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" value="{{ old('password') }}">
                             </div>
                         </div>
                     </div>
 
-                    <div class="box-footer" style="text-align: center;">
-                        <button type="submit" class="btn btn-primary" id="criar" style="float:left">Criar</button>
-                        @yield('button')
-                        <?php $array = explode('/', url()->previous()); ?>
-                        <a href="{{ route(explode('.', $rota)[0].'.index') }}" class="btn btn-danger "
-                           onclick="return confirm('Tem certeza que deseja cancelar a criação de usuário?');" style="float:right">
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-primary">Criar</button>
+                        <a href="{{ route('administradores.index') }}" class="btn btn-danger pull-right"
+                           onclick="return confirm('Tem certeza que deseja cancelar a criação do usuario?');">
                             Cancelar
                         </a>
                     </div>
@@ -92,16 +103,9 @@
 @endsection
 
 @push('scripts')
-<script src="{{ asset('js/vendor/inputmask.min.js') }}"></script>
-<script src="{{ asset('plugins/select2/i18n/pt-BR.js') }}"></script>
+<script src="{{ asset('dist/js/inputmask.min.js') }}"></script>
 <script>
     $(function () {
-
-        $(".select2").select2({
-            'language': 'pt-BR',
-            placeholder: 'Selecione uma opção',
-            width: '100%'
-        });
 
         $("#cpf").inputmask({mask: '999.999.999-99', removeMaskOnSubmit: true});
 
