@@ -25,7 +25,7 @@ class AddValorOnFisioterapiasTable extends Migration
      */
     public function down()
     {
-        Schema::table('oferta_componentes', function (Blueprint $table) {
+        Schema::table('fisioterapias', function (Blueprint $table) {
             $table->dropColumn('valor');
         });
     }
