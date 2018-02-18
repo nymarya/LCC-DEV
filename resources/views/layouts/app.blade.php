@@ -78,11 +78,6 @@
     </section>
 
     <section class="content">
-        @if(config('app.debug'))
-            <div class="callout bg-black text-yellow">
-                <h5>O Sistema está rodando em ambiente de desenvolvimento</h5>
-            </div>
-        @endif
         @yield('content')
     </section>
 </div>
