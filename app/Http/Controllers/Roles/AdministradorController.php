@@ -54,7 +54,7 @@ class AdministradorController extends Controller
                 Rule::unique('users')->whereNull('deleted_at'),
             ],
             'rg' => ['required', 'string', 'max:30'],
-            'nome' => ['required', 'max:255'],
+            'name' => ['required', 'max:255'],
             'email' => [
                 'required', 'string', 'max:255' ,'email', Rule::unique('users')->whereNull('deleted_at'),
             ],
@@ -71,7 +71,7 @@ class AdministradorController extends Controller
     public function getKeysFromRequest(Request $request)
     {
         $original = [
-            'nome', 'rg',  'email', 'password',
+            'name', 'rg',  'email', 'password',
         ];
 
         return array_merge(
@@ -114,7 +114,6 @@ class AdministradorController extends Controller
 
         if (! $usuario) {
             $regras = $this->rules($request);
-
             $this->validate($request, $regras, $this->messages());
 
             $usuario = User::create(

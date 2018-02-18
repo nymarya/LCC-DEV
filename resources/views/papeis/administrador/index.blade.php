@@ -39,13 +39,13 @@
                             <tbody>
                             @foreach($administradores as $adm)
                                 <tr>
-                                    <td>{{ $adm->perfil->usuario->nome }}</td>
+                                    <td>{{ $adm->perfil->usuario->name }}</td>
                                     <td>{{ $adm->perfil->usuario->cpf }}</td>
                                     <td>{{ $adm->perfil->usuario->email }}</td>
                                     <td style="text-align: center">
                                         <div class="btn-group-vertical" style="min-width: 50px; max-width: 80%">
-                                            <a style="border-radius: 0" href="{{ route('administradores.edit', $adm->id) }}"
-                                               class="btn btn-xs btn-warning">Editar</a>
+                                            <a style="border-radius: 0" href="{{ route('administradores.show', $adm->id) }}"
+                                               class="btn btn-xs btn-primary">Ver</a>
                                             <form action="{{ route('administradores.destroy', $adm->id) }}"
                                                   class="btn-group" style="margin-top: 10px;" method="post">
                                                 {{ csrf_field() }}
