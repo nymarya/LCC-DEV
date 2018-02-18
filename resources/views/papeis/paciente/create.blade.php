@@ -4,6 +4,10 @@
     Cadastrar paciente
 @endsection
 
+@push('stylesheets')
+    <link href="{{ asset('bower_components/select2/dist/css/select2.css') }}" rel="stylesheet">
+@endpush
+
 @section('content')
     <div class="row">
         <div class="col-md-12">
@@ -26,7 +30,9 @@
                             </div>
                             <div class="required col-md-6 form-group{{ $errors->has('plano_saude_id') ? ' has-error' : '' }}">
                                 <label for="plano_saude_id">Plano de Saude</label>
-                                <input type="text" class="form-control" name="plano_saude_id">
+                                <select id="plano_saude_id" class="form-control select2" name="plano_saude_id" width="100%">
+                                    <option></option>
+                                </select>
 
                                 @if ($errors->has('plano_saude_id'))
                                     <span class="help-block">
@@ -48,3 +54,32 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('bower_components/select2/dist/js/select2.full.js') }}"></script>
+    <script src="{{ asset('bower_components/select2/dist/js/i18n/pt-BR.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            $("#plano_saude_id").select2({
+                containerCssClass: 'wrap',
+                placeholder: 'Selecione uma opção',
+                ajax: {
+                    dataType: 'json',
+                    url: "{{ route('api.planos_saude') }}",
+                    delay: 400,
+                    data: function (params) {
+                        return {
+                            q: params.term,
+                            page: params.page
+                        };
+                    },
+                    results: function (data, page) {
+                        return {
+                            results: data
+                        };
+                    },
+                }
+            });
+        });
+    </script>
+@endpush

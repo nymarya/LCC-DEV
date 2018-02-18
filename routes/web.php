@@ -31,3 +31,7 @@ Route::group(['middleware' => ['auth', 'role']], function () {
 Route::group(['namespace' => 'Roles'], function (){
     Route::resource('pacientes', 'PacienteController');
 });
+
+Route::prefix('api')->group(function (){
+    Route::get('planos_saude', 'PlanoSaudeController@json')->name('api.planos_saude');
+});
