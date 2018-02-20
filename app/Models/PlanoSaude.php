@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Vinculo;
 use Illuminate\Database\Eloquent\Model;
 
 class PlanoSaude extends Model
@@ -16,4 +17,9 @@ class PlanoSaude extends Model
     protected $fillable = [
         'nome', 'motora_UTI', 'motora_APT', 'resp_UTI', 'resp_APT',
     ];
+
+    public function vinculos()
+    {
+        return $this->hasMany(Vinculo::class, 'plano_saude_id');
+    }
 }

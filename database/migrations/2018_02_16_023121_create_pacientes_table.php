@@ -17,6 +17,7 @@ class CreatePacientesTable extends Migration
             $table->increments('id');
             $table->string('registro')->unique();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

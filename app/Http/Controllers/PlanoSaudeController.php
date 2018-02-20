@@ -111,4 +111,30 @@ class PlanoSaudeController extends Controller
             ],
         ]);
     }
+
+    /**
+     * Cria uma api para os Planos de Saude
+     *
+     * @param Request $request
+     */
+    public function json(Request $request)
+    {
+        $planos = PlanoSaude::when(
+            $q = $request->input('q'), function ($query) use ($q) {
+            return $query->where('nome', 'ilike', "%{$q}%");
+        })->paginate(10);;
+
+        return Response()->json([
+            'results' => $planos->map(function ($plano) {
+                return [
+                    'id' => $plano->id,
+                    'text' => strip_tags($plano->nome),
+                ];
+            }),
+            'pagination' => [
+                'more' => $planos->hasMorePages(),
+            ],
+        ]);
+
+    }
 }

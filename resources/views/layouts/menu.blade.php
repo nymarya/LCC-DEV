@@ -13,9 +13,20 @@
 <ul class="sidebar-menu" data-widget="tree">
     <li class="header">MENU DE NAVEGAÇÃO</li>
     <li>
-        <a href="{{ route('planos.index') }}">
-            <i class="fa fa-plus-square"></i> <span>Planos de saúde</span>
+        <a href="{{ route('pacientes.index') }}">
+            <i class="fa fa-user"></i> <span>Pacientes</span>
         </a>
     </li>
+    <li>
+        <a href="{{ route('planos.index') }}">
+            <i class="fa fa-medkit"></i> <span>Planos de saúde</span>
+        </a>
+    </li>
+    <li>
+        <a href="{{ route('administradores.index') }}">
+            <i class="fa fa-users"></i> <span>Administradores</span>
+        </a>
+    </li>
+
 
 </ul>
