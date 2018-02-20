@@ -164,8 +164,23 @@ class PacienteController extends Controller
     public function destroy($id)
     {
         Vinculo::findOrFail($id)->delete();
-        
+
         return redirect()->route($this->routes['index'])
             ->with('success', 'Vínculo removido com sucesso.');
+    }
+
+    /**
+     * Retorna json com os pacientes. Espera receber um registro
+     * caso o registro exista no banco de dados retorna-se o nome
+     * do usuário. Utilizado na view papeis.paciente.create
+     */
+    public function json(Request $request){
+        $paciente = Paciente::where('registro', $request->input('registro'))->get();
+
+        return Response()->json([
+            'nome' => count($paciente) > 0 ?
+                strip_tags($paciente->first()->perfil->usuario->name) :
+                null
+        ]);
     }
 }

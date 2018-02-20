@@ -155,9 +155,7 @@
                     },
                 }
             });
-        });
 
-        $(document).ready(function () {
             $("#local_id").select2({
                 containerCssClass: 'wrap',
                 placeholder: 'Selecione uma opção',
@@ -178,6 +176,19 @@
                     },
                 }
             });
+
+            $('#registro').on('input', function(){
+                $.ajax({
+                    url: "{{ route('api.pacientes') }}",
+                    data: { registro: this.value},
+                    success: function(data){
+                        if(data['nome'] != null){
+                            console.log('batata');
+                            $('#nome').val(data['nome']);
+                        }
+                    },
+                });
+            })
         });
     </script>
 @endpush
