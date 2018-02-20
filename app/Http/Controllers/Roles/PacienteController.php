@@ -79,7 +79,7 @@ class PacienteController extends Controller
     protected function rulesFromRole(Request $request)
     {
         return array_merge(parent::rulesFromRole($request), [
-            'registro'=> ['required','numeric', 'unique:pacientes,registro'],
+            'registro'=> ['required','numeric'],
             'admissao' => ['required'],
             'nome' => ['required'],
             'quant_mot' => ['required', 'numeric'],
@@ -100,7 +100,8 @@ class PacienteController extends Controller
 
         return view($this->views['index'], [
             'tipo' => (new $type)->getTable(),
-            'pacientes' => Paciente::orderBy('id')->get(),
+            //'pacientes' => Paciente::orderBy('id')->get(),
+            'vinculos' => Vinculo::all()
         ]);
     }
 
@@ -108,17 +109,21 @@ class PacienteController extends Controller
     {
         $this->validate($request, $this->rulesFromRole($request));
 
-        $usuario = User::create([
-            'name' => $request->only('nome')['nome']
-        ]);
+        $paciente = Paciente::withTrashed()->where('registro', $request->only('registro')['registro'])->first();
 
-        $paciente = $usuario->perfis()->create(['tipo' => $this->type])->papel()->create(
-            $this->getRoleDataFromRequest($request));
+        if($paciente == null){
+            $usuario = User::create([
+                'name' => $request->only('nome')['nome']
+            ]);
+
+            $paciente = $usuario->perfis()->create(['tipo' => $this->type])->papel()->create(
+                $this->getRoleDataFromRequest($request));
+        }
 
         $request->request->add(['paciente_id' => $paciente->id]);
 
         Vinculo::create(
-            $request->only('admissao', 'alta', 'quant_mot', 'quant_resp',
+            $request->only('admissao', 'quant_mot', 'quant_resp',
                 'plano_saude_id', 'local_id', 'paciente_id' )
         );
 
@@ -129,18 +134,38 @@ class PacienteController extends Controller
     public function edit($id)
     {
         return view('papeis.paciente.edit', [
-            'paciente' => Paciente::findOrFail($id)
+            'vinculo' => Vinculo::findOrFail($id)
         ]);
     }
 
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'plano_saude_id' => 'required|numeric|exists:planos_saude,id'
+        $regras = $this->rulesFromRole($request);
+
+        unset($regras['registro']);
+
+        $this->validate($request, $regras);
+
+        $vinculo = Vinculo::findOrFail($id);
+
+        $vinculo->update(
+            $request->only('admissao', 'quant_mot', 'quant_resp',
+                'plano_saude_id', 'local_id', 'paciente_id' )
+        );
+
+        $vinculo->paciente->perfil->usuario->update([
+            'name' => $request->only('nome')['nome']
         ]);
 
         return Redirect::route('pacientes.index')
             ->with('success', 'Paciente atualizado com sucesso!');
     }
 
+    public function destroy($id)
+    {
+        Vinculo::findOrFail($id)->delete();
+        
+        return redirect()->route($this->routes['index'])
+            ->with('success', 'Vínculo removido com sucesso.');
+    }
 }

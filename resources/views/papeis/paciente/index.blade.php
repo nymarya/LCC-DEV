@@ -15,24 +15,28 @@
                     </a>
                 </div>
 
-                @if(count($pacientes))
+                @if(count($vinculos))
                     <div class="box-body">
                         <table id="tabela" class="table table-bordered table-striped dataTable" style="width: 100%;">
                             <thead>
                             <tr>
-                                <th class="col-md-10">Registro</th>
+                                <th class="col-md-2">Registro</th>
+                                <th class="col-md-6">Nome</th>
+                                <th class="col-md-2">Plano de Saude</th>
                                 <th class="col-md-2">Opções</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($pacientes as $paciente)
+                            @foreach($vinculos as $vinculo)
                                 <tr>
-                                    <td>{{ $paciente->registro }}</td>
+                                    <td>{{ $vinculo->paciente->registro }}</td>
+                                    <td>{{ $vinculo->paciente->perfil->usuario->name }}</td>
+                                    <td>{{ $vinculo->planoSaude->nome }}</td>
                                     <td style="text-align: center">
                                         <div class="btn-group-vertical" style="min-width: 50px; max-width: 80%">
-                                            <a style="border-radius: 0" href="{{ route('pacientes.edit', $paciente->id) }}"
+                                            <a style="border-radius: 0" href="{{ route('pacientes.edit', $vinculo->id) }}"
                                                class="btn btn-xs btn-warning">Editar</a>
-                                            <form action="{{ route('pacientes.destroy', $paciente->id) }}"
+                                            <form action="{{ route('pacientes.destroy', $vinculo->id) }}"
                                                   class="btn-group" style="margin-top: 10px;" method="post">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}

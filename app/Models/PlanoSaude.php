@@ -20,6 +20,6 @@ class PlanoSaude extends Model
 
     public function vinculos()
     {
-        $this->hasMany(Vinculo::class, 'plano_saude_id');
+        return $this->hasMany(Vinculo::class, 'plano_saude_id');
     }
 }

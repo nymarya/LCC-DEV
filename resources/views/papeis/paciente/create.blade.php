@@ -82,7 +82,6 @@
                                     </span>
                                 @endif
                             </div>
-
                         </div>
                         <div class="row">
                             <div class="required col-md-4 form-group{{ $errors->has('quant_mot') ? ' has-error' : '' }}">
