@@ -19,11 +19,6 @@
                             <img src="{{ asset(auth()->user()->avatar) }}" class="user-image">
                             <span class="hidden-xs valign-middle inline-block" style="line-height: 1">
                                 {{ auth()->user()->name }}
-                                <br>
-                                <span class="small">
-                                        {{ \App\Facades\Perfil::papel()->verbose }}
-
-                                </span>
                             </span>
                         </a>
                         <ul class="dropdown-menu">
@@ -33,13 +28,6 @@
 
                                 <p>
                                     {{ auth()->user()->name }}
-                                    <small>
-                                        {{ \App\Facades\Perfil::papel()->verbose }}
-
-                                        @if(\App\Facades\Perfil::instituicao())
-                                            ({{ \App\Facades\Perfil::instituicao()->sigla }})
-                                        @endif
-                                    </small>
                                 </p>
                             </li>
                             <!-- Menu Footer-->

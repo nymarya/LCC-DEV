@@ -71,7 +71,7 @@ class AdministradorController extends Controller
     public function getKeysFromRequest(Request $request)
     {
         $original = [
-            'name', 'rg',  'email', 'password',
+            'name', 'rg',  'email',
         ];
 
         return array_merge(
@@ -117,7 +117,7 @@ class AdministradorController extends Controller
             $this->validate($request, $regras, $this->messages());
 
             $usuario = User::create(
-                $request->only($this->getKeysFromRequest($request)));
+                array_add($request->only($this->getKeysFromRequest($request)), 'password', bcrypt($request->get('password'))));
         } else {
             $this->validate($request, $this->rulesFromRole($request), $this->messagesFromRole($request));
         }

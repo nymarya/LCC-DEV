@@ -49,4 +49,21 @@ class ProfileController extends Controller
         return back()->with('success', 'Avatar atualizado com sucesso.');
     }
 
+    /**
+     * Set the user's avatar.
+     *
+     * @param  Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function alterarSenha(Request $request)
+    {
+        $this->validate($request, [
+            'password' => ['required', 'max:255','string', 'min:6', 'confirmed'],
+        ]);
+
+        $request->user()->update(['password' => bcrypt($request->get('password'))]);
+
+        return back()->with('success', 'Senha atualizada com sucesso.');
+    }
+
 }

@@ -13,6 +13,9 @@
        ],
    ])
 @endsection
+@push('stylesheets')
+    <link rel="stylesheet" href="{{asset('dist/css/avatar.css')}}">
+@endpush
 
 @section('content')
     <div class="alert alert-danger alert-dismissible hidden" id="avatar-size-error" role="alert">
@@ -39,7 +42,7 @@
                                     <div class="avatar-container">
                                         <div class="avatar-container-content avatar-container-content-circle avatar-container-content-cover"
                                              id="avatar-image"
-                                             style="background-image: url({{ asset($user->avatar) }})"></div>
+                                             style="background-image: url({{ asset($user->avatar) }});"></div>
                                         <input type="file" class="hidden" id="avatar" name="avatar">
                                     </div>
 
