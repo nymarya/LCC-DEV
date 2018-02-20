@@ -79,7 +79,7 @@ class PacienteController extends Controller
     protected function rulesFromRole(Request $request)
     {
         return array_merge(parent::rulesFromRole($request), [
-            'registro'=> ['required','numeric', 'unique:pacientes,registro'],
+            'registro'=> ['required','numeric'],
             'admissao' => ['required'],
             'nome' => ['required'],
             'quant_mot' => ['required', 'numeric'],
@@ -109,12 +109,16 @@ class PacienteController extends Controller
     {
         $this->validate($request, $this->rulesFromRole($request));
 
-        $usuario = User::create([
-            'name' => $request->only('nome')['nome']
-        ]);
+        $paciente = Paciente::withTrashed()->where('registro', $request->only('registro')['registro'])->first();
 
-        $paciente = $usuario->perfis()->create(['tipo' => $this->type])->papel()->create(
-            $this->getRoleDataFromRequest($request));
+        if($paciente == null){
+            $usuario = User::create([
+                'name' => $request->only('nome')['nome']
+            ]);
+
+            $paciente = $usuario->perfis()->create(['tipo' => $this->type])->papel()->create(
+                $this->getRoleDataFromRequest($request));
+        }
 
         $request->request->add(['paciente_id' => $paciente->id]);
 
@@ -157,4 +161,11 @@ class PacienteController extends Controller
             ->with('success', 'Paciente atualizado com sucesso!');
     }
 
+    public function destroy($id)
+    {
+        Vinculo::findOrFail($id)->delete();
+        
+        return redirect()->route($this->routes['index'])
+            ->with('success', 'Vínculo removido com sucesso.');
+    }
 }
