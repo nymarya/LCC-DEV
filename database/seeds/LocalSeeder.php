@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use \Illuminate\Support\Facades\DB;
 
 class LocalSeeder extends Seeder
 {
@@ -12,8 +11,9 @@ class LocalSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('locais')->insert([
-            'nome' => 'andar 1'
+        \App\Models\Local::insert([
+            ['nome' => 'Apartamento'],
+            ['nome' => 'UTI'],
         ]);
     }
 }
