@@ -36,7 +36,7 @@
                                     <a href="{{ route('perfil') }}" class="btn btn-default btn-flat">Meus Dados</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="{{ route('logout') }}" class="btn btn-default btn-flat">Sair</a>
                                 </div>
                             </li>
                         </ul>
