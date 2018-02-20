@@ -25,7 +25,7 @@
                             <div class="required col-md-6 form-group{{ $errors->has('registro') ? ' has-error' : '' }}">
                                 <label for="registro">Registro</label>
                                 <input type="number" id="registro" name="registro" value="{{ $vinculo->paciente->registro }}"
-                                       class="form-control" disabled>
+                                       class="form-control" readonly>
 
                                 @if ($errors->has('registro'))
                                     <span class="help-block">
@@ -36,7 +36,7 @@
                             <div class="required col-md-6 form-group{{ $errors->has('nome') ? ' has-error' : '' }}">
                                 <label for="nome">Nome</label>
                                 <input type="text" id="nome" name="nome" value="{{ $vinculo->paciente->perfil->usuario->name }}"
-                                       class="form-control">
+                                       class="form-control" readonly>
 
                                 @if ($errors->has('nome'))
                                     <span class="help-block">

@@ -142,8 +142,6 @@ class PacienteController extends Controller
     {
         $regras = $this->rulesFromRole($request);
 
-        unset($regras['registro']);
-
         $this->validate($request, $regras);
 
         $vinculo = Vinculo::findOrFail($id);
@@ -152,10 +150,6 @@ class PacienteController extends Controller
             $request->only('admissao', 'quant_mot', 'quant_resp',
                 'plano_saude_id', 'local_id', 'paciente_id' )
         );
-
-        $vinculo->paciente->perfil->usuario->update([
-            'name' => $request->only('nome')['nome']
-        ]);
 
         return Redirect::route('pacientes.index')
             ->with('success', 'Paciente atualizado com sucesso!');
