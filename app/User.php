@@ -49,7 +49,7 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $appends = ['nome'];
+    protected $appends = ['name'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -67,7 +67,7 @@ class User extends Authenticatable
      */
     public function getNomeAttribute()
     {
-        return $this->nome_social ?? $this->nome_civil;
+        return $this->name;
     }
 
     /**

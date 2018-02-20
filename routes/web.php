@@ -19,6 +19,11 @@ Route::group(['namespace' => 'Auth'], function () {
     Route::get('papel', 'RolesController@index')->name('perfis:selecionar');
     Route::post('papel', 'RolesController@update')->name('perfis:trocar');
 
+    Route::get('perfil', 'ProfileController@show')->name('perfil');
+    Route::get('perfil/editar', 'ProfileController@edit')->name('perfil.editar');
+    Route::put('perfil', 'ProfileController@update')->name('perfil.atualizar');
+    Route::post('alterar_avatar', 'ProfileController@alterarAvatar')->name('perfil.avatar');
+    Route::post('alterar_senha', 'ProfileController@alterarSenha')->name('senha.alterar');
 });
 
 Auth::routes();
