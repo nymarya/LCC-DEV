@@ -8,7 +8,7 @@
 
                 <div class="info-box-content">
                     <span class="info-box-text">Pacientes</span>
-                    <span class="info-box-number">1,410</span>
+                    <span class="info-box-number">{{count(\App\Models\Roles\Paciente::all())}}</span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -20,8 +20,8 @@
                 <span class="info-box-icon bg-green"><i class="fa fa-plus-square"></i></span>
 
                 <div class="info-box-content">
-                    <span class="info-box-text">Planos de saúde</span>
-                    <span class="info-box-number">410</span>
+                    <span class="info-box-text">Planos de <br>saúde</span>
+                    <span class="info-box-number">{{count(\App\Models\PlanoSaude::all())}}</span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -30,11 +30,11 @@
         <!-- /.col -->
         <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="info-box">
-                <span class="info-box-icon bg-yellow"><i class="fa fa-files-o"></i></span>
+                <span class="info-box-icon bg-yellow"><i class="fa fa-medkit"></i></span>
 
                 <div class="info-box-content">
-                    <span class="info-box-text">Uploads</span>
-                    <span class="info-box-number">13,648</span>
+                    <span class="info-box-text">Fisioterapias</span>
+                    <span class="info-box-number">{{count(\App\Models\Fisioterapia::all())}}</span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
@@ -43,11 +43,11 @@
         <!-- /.col -->
         <div class="col-md-3 col-sm-6 col-xs-12">
             <div class="info-box">
-                <span class="info-box-icon bg-red"><i class="fa fa-users"></i></span>
+                <span class="info-box-icon bg-red"><i class="fa fa-dollar"></i></span>
 
                 <div class="info-box-content">
-                    <span class="info-box-text">Administradores</span>
-                    <span class="info-box-number">93,139</span>
+                    <span class="info-box-text">Total mensal</span>
+                    <span class="info-box-number">13</span>
                 </div>
                 <!-- /.info-box-content -->
             </div>
