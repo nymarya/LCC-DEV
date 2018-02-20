@@ -63,7 +63,7 @@
                                     <div class="input-group-addon">
                                         <i class="fa fa-calendar"></i>
                                     </div>
-                                    <input type="text" class="form-control pull-right" id="admissao" name="admissao">
+                                    <input type="text" class="form-control pull-right" id="admissao" name="admissao" value="{{ date('d/m/Y') }}">
                                 </div>
                                 @if ($errors->has('admissao'))
                                     <span class="help-block">
@@ -155,9 +155,7 @@
                     },
                 }
             });
-        });
 
-        $(document).ready(function () {
             $("#local_id").select2({
                 containerCssClass: 'wrap',
                 placeholder: 'Selecione uma opção',
@@ -178,6 +176,19 @@
                     },
                 }
             });
+
+            $('#registro').on('input', function(){
+                $.ajax({
+                    url: "{{ route('api.pacientes') }}",
+                    data: { registro: this.value},
+                    success: function(data){
+                        if(data['nome'] != null){
+                            console.log('batata');
+                            $('#nome').val(data['nome']);
+                        }
+                    },
+                });
+            })
         });
     </script>
 @endpush
