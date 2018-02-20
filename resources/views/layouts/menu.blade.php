@@ -18,6 +18,11 @@
         </a>
     </li>
     <li>
+        <a href="#">
+            <i class="fa fa-download"></i> <span>Relatórios</span>
+        </a>
+    </li>
+    <li>
         <a href="{{ route('planos.index') }}">
             <i class="fa fa-medkit"></i> <span>Planos de saúde</span>
         </a>
