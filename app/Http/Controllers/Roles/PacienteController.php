@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Roles;
 
+use App\Models\PlanoSaude;
 use App\Models\Roles\Paciente;
+use App\Models\Vinculo;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class PacienteController extends Controller
 {
@@ -50,8 +54,9 @@ class PacienteController extends Controller
      */
     protected function rules(Request $request)
     {
-        return array_add(parent::rules($request),
-            'registro', ['required', 'numeric']);
+        return array_merge(parent::rules($request),[
+                'registro' => ['required', 'numeric'],
+        ]);
     }
 
     /**
@@ -74,7 +79,13 @@ class PacienteController extends Controller
     protected function rulesFromRole(Request $request)
     {
         return array_merge(parent::rulesFromRole($request), [
-            'registro'=> ['required', 'numeric'],
+            'registro'=> ['required','numeric'],
+            'admissao' => ['required'],
+            'nome' => ['required'],
+            'quant_mot' => ['required', 'numeric'],
+            'quant_resp' => ['required', 'numeric'],
+            'plano_saude_id' => ['required', 'numeric', 'exists:planos_saude,id'],
+            'local_id' => ['required', 'numeric', 'exists:planos_saude,id'],
         ]);
     }
 
@@ -89,8 +100,81 @@ class PacienteController extends Controller
 
         return view($this->views['index'], [
             'tipo' => (new $type)->getTable(),
-            'pacientes' => Paciente::orderBy('id')->get(),
+            //'pacientes' => Paciente::orderBy('id')->get(),
+            'vinculos' => Vinculo::all()
         ]);
     }
 
+    public function store(Request $request)
+    {
+        $this->validate($request, $this->rulesFromRole($request));
+
+        $paciente = Paciente::withTrashed()->where('registro', $request->only('registro')['registro'])->first();
+
+        if($paciente == null){
+            $usuario = User::create([
+                'name' => $request->only('nome')['nome']
+            ]);
+
+            $paciente = $usuario->perfis()->create(['tipo' => $this->type])->papel()->create(
+                $this->getRoleDataFromRequest($request));
+        }
+
+        $request->request->add(['paciente_id' => $paciente->id]);
+
+        Vinculo::create(
+            $request->only('admissao', 'quant_mot', 'quant_resp',
+                'plano_saude_id', 'local_id', 'paciente_id' )
+        );
+
+        return redirect()->route('pacientes.index')
+            ->with('success', 'Paciente cadastrado com sucesso!');
+    }
+
+    public function edit($id)
+    {
+        return view('papeis.paciente.edit', [
+            'vinculo' => Vinculo::findOrFail($id)
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $regras = $this->rulesFromRole($request);
+
+        $this->validate($request, $regras);
+
+        $vinculo = Vinculo::findOrFail($id);
+
+        $vinculo->update(
+            $request->only('admissao', 'quant_mot', 'quant_resp',
+                'plano_saude_id', 'local_id', 'paciente_id' )
+        );
+
+        return Redirect::route('pacientes.index')
+            ->with('success', 'Paciente atualizado com sucesso!');
+    }
+
+    public function destroy($id)
+    {
+        Vinculo::findOrFail($id)->delete();
+
+        return redirect()->route($this->routes['index'])
+            ->with('success', 'Vínculo removido com sucesso.');
+    }
+
+    /**
+     * Retorna json com os pacientes. Espera receber um registro
+     * caso o registro exista no banco de dados retorna-se o nome
+     * do usuário. Utilizado na view papeis.paciente.create
+     */
+    public function json(Request $request){
+        $paciente = Paciente::where('registro', $request->input('registro'))->get();
+
+        return Response()->json([
+            'nome' => count($paciente) > 0 ?
+                strip_tags($paciente->first()->perfil->usuario->name) :
+                null
+        ]);
+    }
 }
