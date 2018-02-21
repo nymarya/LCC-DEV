@@ -239,4 +239,17 @@ abstract class Controller extends BaseController
             'email.unique' => 'O email cadastrado já existe',
         ];
     }
+
+    /**
+     * Custom error messages.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return array
+     */
+    protected function messages()
+    {
+        return [
+            'cpf' => 'O CPF fornecido não é válido',
+        ];
+    }
 }
