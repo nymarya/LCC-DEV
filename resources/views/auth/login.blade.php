@@ -32,7 +32,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
     <div class="login-logo">
-        <a href="/"><b>Fisio</b>CENTRO</a>
+        <a href="/"><b>LifeCycle</b>CANVAS</a>
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
