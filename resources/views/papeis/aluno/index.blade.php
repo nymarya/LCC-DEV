@@ -4,6 +4,16 @@
     {{ucfirst(str_replace(['-', '_'], ' ', $tipo))}}
 @endsection
 
+@section('header')
+    @parent
+
+    @include('partials.breadcrumbs', [
+       'items' => [
+        ucfirst(str_replace(['-', '_'], ' ', $tipo)) => route($tipo . '.index'),
+       ],
+   ])
+@endsection
+
 @section('content')
     <div class="row">
         <div class="col-xs-12">
@@ -15,28 +25,26 @@
                     </a>
                 </div>
 
-                @if(count($vinculos))
+                @if(count($alunos))
                     <div class="box-body">
                         <table id="tabela" class="table table-bordered table-striped dataTable" style="width: 100%;">
                             <thead>
                             <tr>
-                                <th class="col-md-2">Registro</th>
-                                <th class="col-md-6">Nome</th>
-                                <th class="col-md-2">Plano de Saude</th>
+                                <th>Nome</th>
+                                <th class="col-md-2">Email</th>
                                 <th class="col-md-2">Opções</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($vinculos as $vinculo)
+                            @foreach($alunos as $aluno)
                                 <tr>
-                                    <td>{{ $vinculo->paciente->registro }}</td>
-                                    <td>{{ $vinculo->paciente->perfil->usuario->name }}</td>
-                                    <td>{{ $vinculo->planoSaude->nome }}</td>
+                                    <td>{{ $aluno->perfil->usuario->name }}</td>
+                                    <td>{{ $aluno->perfil->usuario->email }}</td>
                                     <td style="text-align: center">
                                         <div class="btn-group-vertical" style="min-width: 50px; max-width: 80%">
-                                            <a style="border-radius: 0" href="{{ route('pacientes.edit', $vinculo->id) }}"
-                                               class="btn btn-xs btn-warning">Editar</a>
-                                            <form action="{{ route('pacientes.destroy', $vinculo->id) }}"
+                                            <a style="border-radius: 0" href="{{ route('alunos.show', $aluno->id) }}"
+                                               class="btn btn-xs btn-primary">Ver</a>
+                                            <form action="{{ route('alunos.destroy', $aluno->id) }}"
                                                   class="btn-group" style="margin-top: 10px;" method="post">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}
@@ -61,22 +69,20 @@
         </div>
     </div>
 @endsection
+
 @push('stylesheets')
-    <link rel="stylesheet" type="text/css"
-          href="{{ asset('bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}" as="style">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}" as="style">
 @endpush
 
 @push('scripts')
-    <script type="text/javascript" charset="utf8"
-            src="{{ asset('bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
-    <script type="text/javascript" charset="utf8"
-            src="{{ asset('bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+    <script type="text/javascript" charset="utf8" src="{{ asset('bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script type="text/javascript" charset="utf8" src="{{ asset('bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
     <script src="{{ asset ("bower_components/jquery-slimscroll/jquery.slimscroll.min.js") }}"></script>
 
     <script type="text/javascript">
-        $(document).ready(function () {
+        $(document).ready(function() {
             $('#tabela').DataTable({
-                responsive: true,
+//
                 "bLengthChange": false,
                 "language": {
                     url: "//cdn.datatables.net/plug-ins/1.10.13/i18n/Portuguese-Brasil.json"
@@ -89,6 +95,6 @@
                     pagination.toggle(this.api().page.info().pages > 1);
                 }
             });
-        });
+        } );
     </script>
 @endpush

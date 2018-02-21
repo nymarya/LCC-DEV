@@ -3,7 +3,7 @@
 @section('body')
     <header class="main-header">
         <a href="/" class="logo">
-            <b>Fisio</b>CENTRO
+            <b>LifeCycle</b>CANVAS
         </a>
         <nav class="navbar navbar-static-top">
             <!-- Sidebar toggle button-->
@@ -59,7 +59,7 @@
     @include("partials.system_alerts")
     <section class="content-header">
         @section('header')
-            <h1>@yield('title', 'FisioCENTRO')</h1>
+            <h1>@yield('title', 'LifeCycleCanvas')</h1>
         @show
     </section>
 

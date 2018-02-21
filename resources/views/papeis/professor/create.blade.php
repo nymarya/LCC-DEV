@@ -65,7 +65,7 @@
 
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary">Criar</button>
-                        <a href="{{ route('administradores.index') }}" class="btn btn-danger pull-right"
+                        <a href="{{ route('professores.index') }}" class="btn btn-danger pull-right"
                            onclick="return confirm('Tem certeza que deseja cancelar a criação do usuario?');">
                             Cancelar
                         </a>

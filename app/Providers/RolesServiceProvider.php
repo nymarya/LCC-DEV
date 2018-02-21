@@ -3,8 +3,9 @@
 namespace App\Providers;
 
 use App\Managers\RolesManager;
-use App\Models\Roles\Paciente;
+use App\Models\Roles\Aluno;
 use App\Models\Roles\Administrador;
+use App\Models\Roles\Professor;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
@@ -19,7 +20,8 @@ class RolesServiceProvider extends ServiceProvider
     {
         Relation::morphMap([
             'administrador' => Administrador::class,
-            'paciente' => Paciente::class,
+            'aluno' => Aluno::class,
+            'professor' => Professor::class,
         ]);
     }
 

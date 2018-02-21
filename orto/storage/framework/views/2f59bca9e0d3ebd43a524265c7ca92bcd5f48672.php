@@ -11,7 +11,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
-    <title><?php echo $__env->yieldContent('title', 'FisioCENTRO'); ?> | <?php echo e(config('app.name', 'FisioCENTRO')); ?></title>
+    <title><?php echo $__env->yieldContent('title', 'LifeCicleCanvas'); ?> | <?php echo e(config('app.name', 'FisioCENTRO')); ?></title>
     <!-- Styles -->
     <link href="<?php echo e(asset('/css/app.css')); ?>" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">

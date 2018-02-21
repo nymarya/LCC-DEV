@@ -13,7 +13,8 @@ class PapeisTableSeeder extends Seeder
     {
         \App\Models\Roles\Papel::insert([
             ['slug' => 'administrador', 'nome' => 'Administrador'],
-            ['slug' => 'paciente', 'nome' => 'Paciente'],
+            ['slug' => 'aluno', 'nome' => 'Aluno'],
+            ['slug' => 'professor', 'nome' => 'Professor'],
         ]);
     }
 }

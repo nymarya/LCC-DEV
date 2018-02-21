@@ -3,7 +3,7 @@
 <body class="login-page bg-indigo">
 <div class="login-box">
     <div class="logo">
-        <a href="javascript:void(0);">Fisio<b>CENTRO</b></a>
+        <a href="javascript:void(0);">LifeCicle<b>CANVAS</b></a>
     </div>
     @if($errors)
         @foreach ($errors->all() as $error)

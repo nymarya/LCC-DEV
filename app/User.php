@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'cpf', 'rg',
+        'name', 'email', 'password',
         'avatar',
     ];
 
@@ -69,26 +69,6 @@ class User extends Authenticatable
     public function getNomeAttribute()
     {
         return $this->name;
-    }
-
-    /**
-     * Get the CPF for the user.
-     *
-     * @return string
-
-    public function getCpfAttribute($value)
-    {
-        return mask($value, '###.###.###-##');
-    }
-     */
-    /**
-     * Get the RG for the user.
-     *
-     * @return string
-     */
-    public function getRgAttribute($value)
-    {
-        return number_format(intval($value), 0, '', '.');
     }
 
     /**

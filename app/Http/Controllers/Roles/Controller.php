@@ -57,33 +57,12 @@ abstract class Controller extends BaseController
     protected function rules(Request $request)
     {
         return [
-            'cpf' => [
-                'required', 'numeric', 'digits:11', 'cpf',
-                Rule::unique('users')->whereNull('deleted_at'),
-            ],
-            'rg' => ['required', 'string', 'max:30'],
-            'nome' => ['required', 'max:255'],
+            'name' => ['required', 'max:255'],
             'email' => [
-                'nullable', 'email', Rule::unique('users')->whereNull('deleted_at'),
+                'required', 'string', 'max:255' ,'email', Rule::unique('users')->whereNull('deleted_at'),
             ],
+            'password' => ['required', 'max:255','string', 'min:6', 'confirmed'],
         ];
-    }
-
-    /**
-     * Get used unique key (CPF or passport) for a specific request.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @return array
-     */
-    public function getUniqueKeysForRequest(Request $request)
-    {
-        $arr = [];
-
-        if ($cpf = $request->get('cpf')) {
-            $arr['cpf'] = $cpf;
-        }
-
-        return $arr;
     }
 
     /**
@@ -95,12 +74,30 @@ abstract class Controller extends BaseController
     public function getKeysFromRequest(Request $request)
     {
         $original = [
-            'nome', 'rg',  'email',
+            'name',  'email',
         ];
 
         return array_merge(
             array_keys($this->getUniqueKeysForRequest($request)), $original
         );
+    }
+
+
+    /**
+     * Get used unique key (CPF or passport) for a specific request.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return array
+     */
+    public function getUniqueKeysForRequest(Request $request)
+    {
+        $arr = [];
+
+        if ($email = $request->get('email')) {
+            $arr['email'] = $email;
+        }
+
+        return $arr;
     }
 
     /**
@@ -174,53 +171,21 @@ abstract class Controller extends BaseController
                 }
             },
             function (Builder $query) {
-                $query->where('cpf', 0);
+                $query->where('email', 0);
             })->first();
 
         if (! $usuario) {
             $regras = $this->rules($request);
-
             $this->validate($request, $regras, $this->messages());
 
-            if ($request->has('email')) {
-                $resposta = (new Client())->post('https://api.sabia.ufrn.br/usuarios/', [
-                    RequestOptions::HEADERS => [
-                        'Authorization' => 'Token ' . env('SABIA_ID'),
-                    ],
-                    RequestOptions::FORM_PARAMS => [
-                        'cpf' => $request->get('cpf'),
-                        'email' => $request->get('email'),
-                        'nome' => $request->get('nome_civil'),
-                        'genero' => $request->get('sexo'),
-                        'data_de_nascimento' => Carbon::createFromFormat(
-                            'd/m/Y', $request->get('data_nascimento')
-                        )->format('Y-m-d'),
-                    ],
-                ]);
-
-                switch ($resposta->getStatusCode()) {
-                    case 200:
-                        break;
-                    case 201:
-                        break;
-                    default:
-                        return Redirect::back()->with(
-                            'error',
-                            'Ocorreu um problema ao criar esse usuário.'
-                        );
-                        break;
-                }
-            }
-
             $usuario = User::create(
-                $request->only($this->getKeysFromRequest($request)));
+                array_add($request->only($this->getKeysFromRequest($request)), 'password', bcrypt($request->get('password'))));
         } else {
             $this->validate($request, $this->rulesFromRole($request), $this->messagesFromRole($request));
         }
         $usuario->perfis()->create(['tipo' => $this->type])->papel()->create(
             $this->getRoleDataFromRequest($request)
         );
-
 
         return redirect()->route($this->routes['index'])
             ->with('success', ucfirst($this->type).' foi cadastrado com sucesso.');
@@ -268,23 +233,9 @@ abstract class Controller extends BaseController
         return [];
     }
 
-    /**
-     * Custom error messages.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return array
-     */
-    protected function messages()
-    {
-        return [
-            'cpf' => 'O CPF fornecido não é válido',
-        ];
-    }
-
     protected function messagesFromRole(Request $request)
     {
         return [
-            'cpf' => 'O CPF fornecido não é válido',
             'email.unique' => 'O email cadastrado já existe',
         ];
     }

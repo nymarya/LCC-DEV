@@ -49,11 +49,6 @@ class AdministradorController extends Controller
     protected function rules(Request $request)
     {
         return [
-            'cpf' => [
-                'required', 'numeric', 'digits:11', 'cpf',
-                Rule::unique('users')->whereNull('deleted_at'),
-            ],
-            'rg' => ['required', 'string', 'max:30'],
             'name' => ['required', 'max:255'],
             'email' => [
                 'required', 'string', 'max:255' ,'email', Rule::unique('users')->whereNull('deleted_at'),
@@ -71,7 +66,7 @@ class AdministradorController extends Controller
     public function getKeysFromRequest(Request $request)
     {
         $original = [
-            'name', 'rg',  'email',
+            'name',  'email',
         ];
 
         return array_merge(
