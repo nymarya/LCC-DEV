@@ -16,8 +16,10 @@ class CreateMidiasTable extends Migration
         Schema::create('midias', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('questao_id')->unsigned();
+            $table->string('arquivo');
 
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('questao_id')->references('id')->on('questoes');
         });

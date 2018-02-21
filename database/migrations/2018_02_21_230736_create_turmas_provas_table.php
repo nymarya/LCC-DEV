@@ -16,6 +16,7 @@ class CreateTurmasProvasTable extends Migration
         Schema::create('turmas_provas', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

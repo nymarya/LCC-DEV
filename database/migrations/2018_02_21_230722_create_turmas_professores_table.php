@@ -19,6 +19,7 @@ class CreateTurmasProfessoresTable extends Migration
             $table->integer('professor_id')->unsigned();
 
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('turma_id')->references('id')->on('turmas');
             $table->foreign('professor_id')->references('id')->on('alunos');

@@ -19,6 +19,7 @@ class CreateBlocosTable extends Migration
             $table->integer('assunto_id')->unsigned();
 
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('prova_id')->references('id')->on('provas');
             $table->foreign('assunto_id')->references('id')->on('assuntos');

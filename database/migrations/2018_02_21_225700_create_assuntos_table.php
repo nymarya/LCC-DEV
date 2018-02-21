@@ -17,6 +17,7 @@ class CreateAssuntosTable extends Migration
             $table->increments('id');
             $table->string('assunto');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

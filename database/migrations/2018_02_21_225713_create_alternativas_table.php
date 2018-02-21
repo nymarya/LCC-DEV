@@ -19,6 +19,7 @@ class CreateAlternativasTable extends Migration
             $table->integer('alternativa'); //texto da alternativa
             $table->boolean('correta')->default(false);
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('questao_id')->references('id')->on('questoes');
         });

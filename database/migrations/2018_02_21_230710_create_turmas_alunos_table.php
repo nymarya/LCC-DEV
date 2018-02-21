@@ -19,6 +19,7 @@ class CreateTurmasAlunosTable extends Migration
             $table->integer('aluno_id')->unsigned();
 
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('turma_id')->references('id')->on('turmas');
             $table->foreign('aluno_id')->references('id')->on('alunos');

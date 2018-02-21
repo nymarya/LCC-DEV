@@ -19,8 +19,9 @@ class CreateQuestaosTable extends Migration
             $table->integer('bloco_id')->unsigned();
 
             $table->timestamps();
+            $table->softDeletes();
 
-            $table->foreign('bloco_id')->references('id')->on('alunos');
+            $table->foreign('bloco_id')->references('id')->on('blocos')->onDelete('cascade');
         });
     }
 

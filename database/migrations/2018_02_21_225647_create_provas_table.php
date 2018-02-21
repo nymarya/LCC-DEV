@@ -20,6 +20,7 @@ class CreateProvasTable extends Migration
 
             $table->foreign('aluno_id')->references('id')->on('alunos');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
