@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ ucfirst(str_replace(['-', '_'], ' ', $usuario->perfil->tipo))}}
+Questão
 @endsection
 
 @section('content')
@@ -10,24 +10,35 @@
             <div class="box">
                 <table class="table">
                     <tr>
-                        <th>Nome</th>
-                        <td>{{$usuario->perfil->usuario->name}}</td>
-                    </tr>
-                    <tr>
-                        <th>CPF</th>
-                        <td>{{$usuario->perfil->usuario->cpf}}</td>
-                    </tr>
-                    <tr>
-                        <th>RG</th>
-                        <td>{{$usuario->perfil->usuario->rg}}</td>
-                    </tr>
-                    <tr>
-                        <th>Email</th>
-                        <td>{{$usuario->perfil->usuario->email}}</td>
+                        <th>Texto</th>
+                        <td>{{$questao->questao}}</td>
                     </tr>
                 </table>
+
+                <div class="box-header">
+                    Alternativas
+                </div>
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Texto</th>
+                        <th>Correta</th>
+                    </tr>
+                    </thead>
+                    @foreach($questao->alternativas as $alternativa)
+                        <tr>
+                            <td>{{ $alternativa->alternativa }}</td>
+                            <td>
+                                @if($alternativa->correta)
+                                <i class="fa fa-check-circle"></i>
+                                    @endif
+                            </td>
+                        </tr>
+                    @endforeach
+                </table>
                 <div class="box-footer">
-                    <a href="{{ route($usuario->getTable() . '.index') }}" class="btn btn-xs btn-primary pull-right">
+                    <a href="{{ route( 'questoes.index') }}" class="btn btn-xs btn-primary pull-right">
                         Voltar
                     </a>
                 </div>

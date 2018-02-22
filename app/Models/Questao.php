@@ -41,7 +41,7 @@ class Questao extends Model
      */
     public function alternativas()
     {
-        return $this->hasMany(Alternativa::class)->wherePivot('deleted_at', null);
+        return $this->hasMany(Alternativa::class);
     }
 
     /**

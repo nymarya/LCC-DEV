@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ucfirst(str_replace(['-', '_'], ' ', $tipo))}}
+    Questões
 @endsection
 
 @section('header')
@@ -9,7 +9,7 @@
 
     @include('partials.breadcrumbs', [
        'items' => [
-        ucfirst(str_replace(['-', '_'], ' ', $tipo)) => route($tipo . '.index'),
+        'Questões' => route( 'questoes.index'),
        ],
    ])
 @endsection
@@ -19,37 +19,37 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    {{ ucwords(str_replace(['-', '_'], ' ', $tipo)) }}
-                    <a href="{{ route($tipo.'.create') }}" class="btn btn-xs btn-primary pull-right">
-                        Adicionar {{ str_replace(['-', '_'], ' ', $tipo) }}
+                    Questões
+                    <a href="{{ route('questoes.create') }}" class="btn btn-xs btn-primary pull-right">
+                        Adicionar nova questão
                     </a>
                 </div>
 
-                @if(count($professores))
+                @if(count($questoes))
                     <div class="box-body">
                         <table id="tabela" class="table table-bordered table-striped dataTable" style="width: 100%;">
                             <thead>
                             <tr>
-                                <th>Nome</th>
-                                <th class="col-md-2">Email</th>
+                                <th>Questão</th>
+                                <th class="col-md-2">Número de alternativas</th>
                                 <th class="col-md-2">Opções</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($professores as $professor)
+                            @foreach($questoes as $questao)
                                 <tr>
-                                    <td>{{ $professor->perfil->usuario->name }}</td>
-                                    <td>{{ $professor->perfil->usuario->email }}</td>
+                                    <td>{{ $questao->questao }}</td>
+                                    <td>{{ $questao->alternativas()->count() }}</td>
                                     <td style="text-align: center">
                                         <div class="btn-group-vertical" style="min-width: 50px; max-width: 80%">
-                                            <a style="border-radius: 0" href="{{ route('professores.show', $professor->id) }}"
+                                            <a style="border-radius: 0" href="{{ route('questoes.show', $questao->id) }}"
                                                class="btn btn-xs btn-primary">Ver</a>
-                                            <form action="{{ route('professores.destroy', $professor->id) }}"
+                                            <form action="{{ route('questoes.destroy', $questao->id) }}"
                                                   class="btn-group" style="margin-top: 10px;" method="post">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}
                                                 <button class="btn btn-xs btn-danger"
-                                                        onclick="return confirm('Você tem certeza que deseja excluir esse plano?');">
+                                                        onclick="return confirm('Você tem certeza que deseja excluir essa questão?');">
                                                     Excluir
                                                 </button>
                                             </form>
