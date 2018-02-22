@@ -96,16 +96,21 @@ class ProvaController extends Controller
 
         foreach ($questoes as $questao){
             //recupera id da alternativa q o aluno marcou
-            $id = intval(6, strlen($this->request->input('questao'.$questao->id))-1);
-            dd($id);
+            $id = intval(substr($this->request->input('questao'.$questao->id), 6, strlen($this->request->input('questao'.$questao->id))));
 
             $alternativa = Alternativa::find($id);
-            if($alternativa->correta){
+            if($alternativa->correta == true){
                 $acertos++;
             }
         }
 
-        dd($acertos);
+        Perfil::papel()->notas()->create([
+           'prova_id' => Perfil::papel()->turmas->first()->provas->first()->id,
+           'nota' => $acertos
+        ]);
+
+
+        return redirect()->route('gabarito')->with('data', ['acertos'=>$acertos]);
 
     }
 }

@@ -36,6 +36,9 @@ Route::group(['middleware' => ['auth', 'role']], function () {
         ]);
     });
     Route::post('check', 'Exams\ProvaController@check')->name('check');
+    Route::get('gabarito', function () {
+        return view('papeis.aluno.gabarito');
+    })->name('gabarito');
 
     Route::resource('turmas', 'TurmaController');
     Route::get('/', 'HomeController@index');

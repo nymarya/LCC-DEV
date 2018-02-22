@@ -2,6 +2,7 @@
 
 namespace App\Models\Roles;
 
+use App\Models\Nota;
 use App\Models\Traits\Papel;
 use App\Models\Turma;
 use Illuminate\Database\Eloquent\Model;
@@ -40,5 +41,9 @@ class Aluno extends Model
     public function turmas()
     {
         return $this->belongsToMany(Turma::class, 'turmas_alunos', 'aluno_id', 'turma_id');
+    }
+
+    public function notas(){
+        return $this->hasMany(Nota::class);
     }
 }

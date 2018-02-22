@@ -9,6 +9,11 @@
     </a>
 </li>
 <li>
+    <a href="{{ route('questoes.index') }}">
+        <i class="fa fa-edit"></i> <span>Questões</span>
+    </a>
+</li>
+<li>
     <a href="{{ route('alunos.index') }}">
         <i class="fa fa-user"></i> <span>Alunos</span>
     </a>
