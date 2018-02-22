@@ -16,7 +16,7 @@ class TurmaController extends Controller
 {
   public function __construct()
   {
-    $this->middleware('roles:professor');
+    $this->middleware('roles:professor,aluno');
 
   }
     /**

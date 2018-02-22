@@ -14,14 +14,6 @@
                         <td>{{$usuario->perfil->usuario->name}}</td>
                     </tr>
                     <tr>
-                        <th>CPF</th>
-                        <td>{{$usuario->perfil->usuario->cpf}}</td>
-                    </tr>
-                    <tr>
-                        <th>RG</th>
-                        <td>{{$usuario->perfil->usuario->rg}}</td>
-                    </tr>
-                    <tr>
                         <th>Email</th>
                         <td>{{$usuario->perfil->usuario->email}}</td>
                     </tr>
