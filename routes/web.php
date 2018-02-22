@@ -33,14 +33,14 @@ Route::group(['middleware' => ['auth', 'role']], function () {
     Route::resource('turmas', 'TurmaController');
     Route::get('/', 'HomeController@index');
     Route::resource('planos', 'PlanoSaudeController');
-
+    Route::get('turmas/select', 'TurmaController@select')
+        ->name('turmas.select');
     Route::group(['namespace' => 'Roles'], function () {
         Route::resource('administradores', 'AdministradorController');
         Route::resource('alunos', 'AlunoController');
         Route::resource('professores', 'ProfessorController');
+        Route::get('alunosmatricula', 'ProfessorController@alunos')->name('alunosmatricula');
+        Route::post('matricular_aluno/{id}', 'ProfessorController@matricular_aluno')->name('matricular_aluno');
+        Route::get('matricula_aluno/{id}', 'ProfessorController@matricula_aluno')->name('matricula_aluno');
     });
-});
-
-Route::prefix('api')->group(function (){
-
 });

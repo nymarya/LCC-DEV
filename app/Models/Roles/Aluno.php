@@ -3,6 +3,7 @@
 namespace App\Models\Roles;
 
 use App\Models\Traits\Papel;
+use App\Models\Turma;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -32,4 +33,12 @@ class Aluno extends Model
     protected $dates = [
         'deleted_at',
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function turmas()
+    {
+        return $this->belongsToMany(Turma::class, 'turmas_alunos', 'aluno_id', 'turma_id');
+    }
 }
