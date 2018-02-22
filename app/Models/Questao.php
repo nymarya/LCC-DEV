@@ -28,10 +28,28 @@ class Questao extends Model
     ];
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'questao',
+    ];
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function alternativas()
     {
         return $this->hasMany(Alternativa::class)->wherePivot('deleted_at', null);
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function blocos()
+    {
+        return $this->belongsToMany(Bloco::class, 'blocos_questoes', 'questao_id', 'bloco_id')->wherePivot('deleted_at', null);
+    }
+
 }

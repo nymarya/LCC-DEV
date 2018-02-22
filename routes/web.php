@@ -35,6 +35,10 @@ Route::group(['middleware' => ['auth', 'role']], function () {
         Route::resource('alunos', 'AlunoController');
         Route::resource('professores', 'ProfessorController');
     });
+
+    Route::group(['namespace' => 'Exams'], function () {
+        Route::resource('questoes', 'QuestaoController');
+    });
 });
 
 Route::prefix('api')->group(function (){
