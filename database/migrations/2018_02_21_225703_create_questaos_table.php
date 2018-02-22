@@ -16,6 +16,8 @@ class CreateQuestaosTable extends Migration
         Schema::create('questoes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('questao');
+            $table->integer('assunto_id')->unsigned();
+            $table->foreign('assunto_id')->references('id')->on('assuntos');
 
             $table->timestamps();
             $table->softDeletes();

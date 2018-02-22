@@ -32,7 +32,7 @@ Auth::routes();
 Route::group(['middleware' => ['auth', 'role']], function () {
     Route::resource('turmas', 'TurmaController');
     Route::get('/', 'HomeController@index');
-    Route::resource('planos', 'PlanoSaudeController');
+    Route::resource('assuntos', 'AssuntoController');
     Route::get('turmas/select', 'TurmaController@select')
         ->name('turmas.select');
     Route::group(['namespace' => 'Roles'], function () {

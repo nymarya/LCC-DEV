@@ -23,8 +23,26 @@
 
                 <div class="box">
                     <div class="box-body">
-                        <div class="required col-md-12 form-group{{ $errors->has('questao') ? ' has-error' : '' }}">
-                             <div>
+                        <div class="required form-group{{ $errors->has('assunto_id') ? ' has-error' : '' }}">
+                            <label for="assunto_id">Assunto</label>
+                            <select class="form-control" name="assunto_id">
+                                <option value="" {{ ! old('assunto_id') ? ' selected' : '' }}>Selecione uma
+                                    opção
+                                </option>
+                                @foreach($assuntos as $assunto)
+                                    <option value="{{$assunto->id}}">{{$assunto->assunto}}
+                                    </option>
+                                @endforeach
+                            </select>
+
+                            @if ($errors->has('assunto_id'))
+                                <span class="help-block">
+                                            <strong>{{ $errors->first('assunto_id') }}</strong>
+                                        </span>
+                            @endif
+                        </div>
+                        <div class="required form-group{{ $errors->has('questao') ? ' has-error' : '' }}">
+                            <div>
                                 <label for="questao" style="margin-left: 10px">Questão</label>
                                 <input style="margin-left: 5px" type="text" id="questao" name="questao" value="{{ old('questao') }}" maxlength="255" class="form-control" required>
 

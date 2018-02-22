@@ -6,7 +6,8 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <form id="form" action="{{ route('matricular_aluno', $aluno->id) }}" method="post" enctype="multipart/form-data">
+            <form id="form" action="{{ route('matricular_aluno', $aluno->id) }}" method="post"
+                  enctype="multipart/form-data">
                 {{ csrf_field() }}
 
                 <div class="box">
@@ -18,7 +19,9 @@
                                 <div class="required form-group{{ $errors->has('turma_id') ? ' has-error' : '' }}">
                                     <label for="turma_id">Turma</label>
                                     <select class="form-control" name="turma_id">
-                                        <option value="" {{ ! old('turma_id') ? ' selected' : '' }}>Selecione uma opção</option>
+                                        <option value="" {{ ! old('turma_id') ? ' selected' : '' }}>Selecione uma
+                                            opção
+                                        </option>
                                         @foreach($turmas as $turma)
                                             <option value="{{$turma->id}}">{{$turma->codigo}}
                                             </option>
@@ -27,8 +30,8 @@
 
                                     @if ($errors->has('turma_id'))
                                         <span class="help-block">
-                    <strong>{{ $errors->first('turma_id') }}</strong>
-                </span>
+                                            <strong>{{ $errors->first('turma_id') }}</strong>
+                                        </span>
                                     @endif
                                 </div>
                             </div>
