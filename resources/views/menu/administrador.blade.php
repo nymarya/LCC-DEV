@@ -5,7 +5,7 @@
 </li>
 <li>
     <a href="{{ route('professores.index') }}">
-        <i class="fa fa-download"></i> <span>Professores</span>
+        <i class="fa fa-user-plus"></i> <span>Professores</span>
     </a>
 </li>
 <li>

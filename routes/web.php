@@ -25,6 +25,8 @@ Route::group(['namespace' => 'Auth'], function () {
     Route::get('logout', 'LoginController@logout');
 });
 
+Route::post('cadastroAluno', 'Roles\AlunoController@cadastroAluno')->name('cadastroAluno');
+
 Auth::routes();
 
 Route::group(['middleware' => ['auth', 'role']], function () {

@@ -53,4 +53,41 @@ class AlunoController extends Controller
             'alunos' => Aluno::orderBy('id')->get(),
         ]);
     }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function cadastroAluno(Request $request)
+    {
+        $usuario = User::when(
+            count($keys = $this->getUniqueKeysForRequest($request)),
+            function (Builder $query) use ($keys) {
+                foreach ($keys as $key => $value) {
+                    $query->where($key, $value);
+                }
+            },
+            function (Builder $query) {
+                $query->where('email', 0);
+            })->first();
+
+        if (! $usuario) {
+            $regras = $this->rules($request);
+            $this->validate($request, $regras, $this->messages());
+
+            $usuario = User::create(
+                array_add($request->only($this->getKeysFromRequest($request)), 'password', bcrypt($request->get('password'))));
+        } else {
+            $this->validate($request, $this->rulesFromRole($request), $this->messagesFromRole($request));
+        }
+        $usuario->perfis()->create(['tipo' => $this->type])->papel()->create(
+            $this->getRoleDataFromRequest($request)
+        );
+
+        return redirect()->route('login')
+            ->with('success', ucfirst($this->type).' foi cadastrado com sucesso, realize seu login!');
+    }
+
 }

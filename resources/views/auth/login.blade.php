@@ -30,7 +30,9 @@
     </script>
 </head>
 <body class="hold-transition login-page">
+@include("partials.system_alerts")
 <div class="login-box">
+
     <div class="login-logo">
         <a href="/"><b>LifeCycle</b>CANVAS</a>
     </div>
@@ -61,6 +63,7 @@
                 @endif
             </div>
             <div class="row">
+
                 <!-- /.col -->
                 <div class="col-xs-12">
                     <button type="submit" class="btn btn-danger btn-block btn-flat pull-right">Entrar</button>
@@ -68,6 +71,7 @@
                 <!-- /.col -->
             </div>
         </form>
+        <a href="{{ url('/register') }}" class="text-center">Cadastre-se</a>
 
     </div>
     <!-- /.login-box-body -->
