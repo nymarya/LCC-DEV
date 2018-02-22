@@ -42,7 +42,7 @@ class Questao extends Model
      */
     public function alternativas()
     {
-        return $this->hasMany(Alternativa::class);
+        return $this->hasMany(Alternativa::class)->whereNull('deleted_at');
     }
 
     /**

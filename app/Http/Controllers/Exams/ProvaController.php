@@ -96,13 +96,16 @@ class ProvaController extends Controller
 
         foreach ($questoes as $questao){
             //recupera id da alternativa q o aluno marcou
-            $id = intval(7, strlen($this->request->input('questao'.$questao->id)));
+            $id = intval(6, strlen($this->request->input('questao'.$questao->id))-1);
+            dd($id);
 
             $alternativa = Alternativa::find($id);
             if($alternativa->correta){
                 $acertos++;
             }
         }
+
+        dd($acertos);
 
     }
 }
