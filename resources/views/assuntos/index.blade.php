@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Turmas ingressantes
+    Assuntos
 @endsection
 
 @section('header')
@@ -19,7 +19,7 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    Turma
+                    Assunto
                         <a href="{{ route('assuntos.create') }}" class="btn btn-xs btn-primary pull-right">
                             Cadastrar assunto
                         </a>
