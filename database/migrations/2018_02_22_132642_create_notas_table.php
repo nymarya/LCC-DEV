@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProvasTable extends Migration
+class CreateNotasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateProvasTable extends Migration
      */
     public function up()
     {
-        Schema::create('provas', function (Blueprint $table) {
+        Schema::create('notas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('tipo');
-            $table->integer('turma_id')->unsigned();
-
-            $table->foreign('turma_id')->references('id')->on('turmas');
+            $table->integer('aluno_id')->unsigned();
+            $table->foreign('aluno_id')->references('id')->on('alunos');
+            $table->integer('prova_id')->unsigned();
+            $table->foreign('prova_id')->references('id')->on('provas');
+            $table->integer('nota');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -31,6 +31,6 @@ class CreateProvasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('provas');
+        Schema::dropIfExists('notas');
     }
 }

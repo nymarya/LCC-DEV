@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProvasTable extends Migration
+class CreateBlocosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateProvasTable extends Migration
      */
     public function up()
     {
-        Schema::create('provas', function (Blueprint $table) {
+        Schema::create('blocos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('tipo');
-            $table->integer('turma_id')->unsigned();
+            $table->integer('prova_id')->unsigned();
+            $table->foreign('prova_id')->references('id')->on('provas');
+            $table->integer('questao_id')->unsigned();
+            $table->foreign('questao_id')->references('id')->on('questoes');
 
-            $table->foreign('turma_id')->references('id')->on('turmas');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -31,6 +32,6 @@ class CreateProvasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('provas');
+        Schema::dropIfExists('blocos');
     }
 }

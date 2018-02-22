@@ -15,6 +15,7 @@ require('./bootstrap');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('form-set', require('./components/FormSet.vue'));
+Vue.component('select2', require('./components/Select2.vue'));
 
 window.extra = {};
 

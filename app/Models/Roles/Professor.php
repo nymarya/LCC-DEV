@@ -32,4 +32,9 @@ class Professor extends Model
     protected $dates = [
         'deleted_at',
     ];
+
+
+    public function turmas(){
+
+    }
 }

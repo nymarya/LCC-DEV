@@ -90,4 +90,29 @@ class QuestaoController extends Controller
 
         return redirect()->route('questoes.index')->with('success', 'Questão excluída com sucesso');
     }
+
+    public function select(){
+        $instrumentos = Questao::when(
+            $q = $this->request->input('q'), function ($query) use ($q) {
+            return $query->where('questao', $q);
+        })->with('assunto')->paginate(20);
+
+        return response()->json([
+            'results' => $instrumentos->groupBy('assunto_id')->map(function ($instrumentos, $tipo) {
+                return [
+                    'text' => $instrumentos->first()->assunto->assunto,
+                    'children' => $instrumentos->map(function ($instrumento) {
+                        return [
+                            'id' => $instrumento->id,
+                            'text' => $instrumento->questao ,
+                        ];
+
+                    }),
+                ];
+            })->values(),
+            'pagination' => [
+                'more' => $instrumentos->hasMorePages(),
+            ],
+        ]);
+    }
 }

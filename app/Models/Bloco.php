@@ -16,7 +16,7 @@ class Bloco extends Model
      *
      * @var string
      */
-    protected $table = 'bloco';
+    protected $table = 'blocos';
 
     /**
      * The attributes that should be mutated to dates.
@@ -33,6 +33,6 @@ class Bloco extends Model
      * @var array
      */
     protected $fillable = [
-        'assunto_id', 'prova_id',
+        'questao_id', 'prova_id',
     ];
 }

@@ -10,6 +10,7 @@ window._ = require('lodash');
 window.$ = window.jQuery = require('jquery');
 require('bootstrap');
 require('admin-lte');
+require('select2');
 require('moment');
 
 /**
