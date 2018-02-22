@@ -68,7 +68,7 @@
                 <p class="lead">Acertos:</p>
 
                 <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
-                    Você acertou X questões!
+                    Você acertou {{session('data')['acertos']}} questões!
                 </p>
             </div>
             <!-- /.col -->

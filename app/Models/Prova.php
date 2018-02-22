@@ -32,7 +32,7 @@ class Prova extends Model
     ];
 
     public function questoes(){
-        return $this->belongsToMany(Questao::class, 'blocos');
+        return $this->belongsToMany(Questao::class, 'blocos')->whereNull('questoes.deleted_at');
     }
 
     public function turma(){

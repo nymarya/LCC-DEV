@@ -31,11 +31,14 @@ Auth::routes();
 
 Route::group(['middleware' => ['auth', 'role']], function () {
     Route::get('verProva', function () {
-        return view('papeis.aluno.prova');
+        return view('papeis.aluno.prova', [
+            'questoes' => \App\Facades\Perfil::papel()->turmas->first()->provas->first()->questoes
+        ]);
     });
+    Route::post('check', 'Exams\ProvaController@check')->name('check');
     Route::get('gabarito', function () {
         return view('papeis.aluno.gabarito');
-    });
+    })->name('gabarito');
 
     Route::resource('turmas', 'TurmaController');
     Route::get('/', 'HomeController@index');
