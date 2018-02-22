@@ -31,6 +31,7 @@
                             <thead>
                             <tr>
                                 <th>Questão</th>
+                                <th>Assunto</th>
                                 <th class="col-md-2">Número de alternativas</th>
                                 <th class="col-md-2">Opções</th>
                             </tr>
@@ -39,6 +40,7 @@
                             @foreach($questoes as $questao)
                                 <tr>
                                     <td>{{ $questao->questao }}</td>
+                                    <td>{{ $questao->assunto->assunto }}</td>
                                     <td>{{ $questao->alternativas()->count() }}</td>
                                     <td style="text-align: center">
                                         <div class="btn-group-vertical" style="min-width: 50px; max-width: 80%">

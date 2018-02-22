@@ -14,4 +14,9 @@
         <i class="fa fa-edit"></i> <span>Questões</span>
     </a>
 </li>
+<li>
+    <a href="{{ route('assuntos.index') }}">
+        <i class="fa fa-edit"></i> <span>Assuntos</span>
+    </a>
+</li>
 

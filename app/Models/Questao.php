@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Assunto;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -33,7 +34,7 @@ class Questao extends Model
      * @var array
      */
     protected $fillable = [
-        'questao',
+        'questao', 'assunto_id',
     ];
 
     /**
@@ -45,11 +46,11 @@ class Questao extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function blocos()
+    public function assunto()
     {
-        return $this->belongsToMany(Bloco::class, 'blocos_questoes', 'questao_id', 'bloco_id')->wherePivot('deleted_at', null);
+        return $this->belongsTo(Assunto::class);
     }
 
 }

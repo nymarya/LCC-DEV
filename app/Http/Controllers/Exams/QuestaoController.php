@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Exams;
 
+use App\Assunto;
 use App\Http\Controllers\Controller;
 use App\Models\Questao;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class QuestaoController extends Controller
      */
     public function __construct(Request $request)
     {
-        $this->middleware('role:administrador');
+        $this->middleware('role:administrador,professor');
         $this->request = $request;
     }
 
@@ -28,17 +29,20 @@ class QuestaoController extends Controller
     }
 
     public function create(){
-        return view('questoes.create');
+        return view('questoes.create',[
+            'assuntos' => Assunto::all(),
+        ]);
     }
 
     public function store() {
         $this->validate($this->request, [
+            'assunto_id' => ['required'],
             'questao' => ['required'],
             'alternativas' => ['required', 'array'],
             'alternativas.*.alternativa' => ['required'],
         ]);
 
-        $questao = Questao::create($this->request->only('questao'));
+        $questao = Questao::create($this->request->only(['questao','assunto_id']));
 
         $alternativas = collect($this->request->get('alternativas'))->map(function ($item, $key) {
             if($item['correta'] == null){

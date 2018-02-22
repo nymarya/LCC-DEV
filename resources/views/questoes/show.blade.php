@@ -13,6 +13,10 @@ Questão
                         <th>Texto</th>
                         <td>{{$questao->questao}}</td>
                     </tr>
+                    <tr>
+                        <th>Assunto</th>
+                        <td>{{$questao->assunto->assunto}}</td>
+                    </tr>
                 </table>
 
                 <div class="box-header">
