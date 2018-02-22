@@ -80,4 +80,14 @@ class ProvaController extends Controller
 
         return redirect()->route('provas.index')->with('success', 'Prova excluída com sucesso');
     }
+
+    /**
+     * função que verifica acertos do aluno e atribui nota
+     */
+    public function check(){
+
+        $nota = 0;
+
+
+    }
 }

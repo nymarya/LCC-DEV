@@ -15,35 +15,20 @@
                     </div>
 
                     <div class="box-body">
-                        @foreach(\App\Models\Questao::take(10)->get() as $questao)
+                        @foreach($questoes as $questao)
                         <div class="form-group">
-                            <label>PERGUNTA?</label>
+                            <label>{{$questao->questao}}</label>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-                                    Option one is this and that&mdash;be sure to include why it's great
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                                    Option two can be something else and selecting it will deselect option one
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-                                    Option one is this and that&mdash;be sure to include why it's great
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                                    Option two can be something else and selecting it will deselect option one
+
+                                @foreach($questao->alternativas as $alternativa)
+                                    <input type="radio"  id="{{'option'.$alternativa->id}}" name="{{'name'.$questao->id}}" value="{{'option'.$alternativa->id}}" >
+                                        {{$alternativa->alternativa}}<br>
+                                @endforeach
                                 </label>
                             </div>
                         </div>
-                            @endforeach
+                        @endforeach
                     </div>
 
                     <div class="box-footer">
