@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Cadastrar questão
+    Cadastrar prova
 @endsection
 
 @section('header')
@@ -15,10 +15,10 @@
    ])
 @endsection
 
-@section('stylesheets')
-    <link href="{{asset('plugins/select2/dist/css/select2.css')}}" rel="stylesheet" />
+@push('stylesheets')
+    <link href="{{asset('plugins/select2/css/select2.css')}}" rel="stylesheet" />
 
-@endsection
+@endpush
 
 @section('content')
     <div class="row">
@@ -47,9 +47,10 @@
                             @endif
                         </div>
                         <div class="required form-group{{ $errors->has('questao') ? ' has-error' : '' }}">
+
                             @foreach($assuntos as $assunto)
-                                <label for="questoes">Municípios envolvidos na oferta</label>
-                                <select class="multiple-select form-control" name="questoes[]" id="questoes" multiple="multiple">
+                                <label for="questoes">Questões de {{$assunto->assunto}}</label>
+                                <select class="multiple-select form-control select2-input" name="questoes['{{$assunto->id}}'][]" id="questoes" multiple="multiple">
 
                                 <option value="">Selecione uma opção</option>
                                 @foreach ($assunto->questoes as $questao)
@@ -58,6 +59,7 @@
                                 </select>
 
                             @endforeach
+
                         </div>
                     </div>
 
@@ -75,11 +77,13 @@
 @endsection
 
 @push('scripts')
-<script src="{{ asset('app.js') }}"></script>
 <script src="{{asset('plugins/jquery.min.js')}}"></script>
+
+<!-- Bootstrap 3.3.7 -->
+<script src="{{asset('bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('plugins/select2/js/select2.full.min.js')}}"></script>
+<script src="{{ asset('plugins/select2/js/i18n/pt-BR.js') }}"></script>
 <script src="{{asset('plugins/moment.js')}}"></script>
-<script src="{{asset('plugins/select2/dist/js/select2.full.min.js')}}"></script>
-<script src="{{ asset('plugins/select2/dist/js/i18n/pt-BR.js') }}"></script>
 
 <script>
     $(document).ready(function () {
