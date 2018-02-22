@@ -1,8 +1,4 @@
-<li>
-    <a href="{{ route('alunos.index') }}">
-        <i class="fa fa-user"></i> <span>Alunos</span>
-    </a>
-</li>
+
 <li>
     <a href="{{ route('professores.index') }}">
         <i class="fa fa-user-plus"></i> <span>Professores</span>

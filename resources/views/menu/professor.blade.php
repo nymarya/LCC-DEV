@@ -5,6 +5,11 @@
 </li>
 <li>
     <a href="{{ route('alunosmatricula') }}">
-        <i class="fa fa-users"></i> <span>Matrícula alunos</span>
+        <i class="fa fa-pencil-square-o"></i> <span>Matrícula</span>
+    </a>
+</li>
+<li>
+    <a href="{{ route('alunos.index') }}">
+        <i class="fa fa-user"></i> <span>Alunos</span>
     </a>
 </li>
