@@ -27,7 +27,15 @@ class Prova extends Model
         'deleted_at',
     ];
 
+    protected $fillable = [
+        'tipo', 'turma_id'
+    ];
+
     public function questoes(){
-        $this->hasManyThrough(Questao::class, Bloco::class);
+        return $this->belongsToMany(Questao::class, 'blocos');
+    }
+
+    public function turma(){
+        return $this->belongsTo(Turma::class);
     }
 }

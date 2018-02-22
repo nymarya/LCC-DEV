@@ -52,7 +52,6 @@
                                 <label for="questoes">Questões de {{$assunto->assunto}}</label>
                                 <select class="multiple-select form-control select2-input" name="questoes['{{$assunto->id}}'][]" id="questoes" multiple="multiple">
 
-                                <option value="">Selecione uma opção</option>
                                 @foreach ($assunto->questoes as $questao)
                                     <option value="{{ $questao->id }}">{{ $questao->questao }}</option>
                                 @endforeach

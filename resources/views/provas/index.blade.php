@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Questões
+    Provas
 @endsection
 
 @section('header')
@@ -19,7 +19,7 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    Questões
+                    Provas
                     <a href="{{ route('provas.create') }}" class="btn btn-xs btn-primary pull-right">
                         Adicionar nova prova
                     </a>
@@ -30,23 +30,21 @@
                         <table id="tabela" class="table table-bordered table-striped dataTable" style="width: 100%;">
                             <thead>
                             <tr>
-                                <th>Prova</th>
-                                <th>Turma</th>
-                                <th class="col-md-2">Número de alternativas</th>
+                                <th class="col-md-8">Turma</th>
+                                <th class="col-md-2">Número de questões</th>
                                 <th class="col-md-2">Opções</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($provas as $prova)
                                 <tr>
-                                    <td>{{ $questao->questao }}</td>
-                                    <td>{{ $prova->aluno }}</td>
-                                    <td>{{ $questao->alternativas()->count() }}</td>
+                                    <td>{{ $prova->turma->codigo }}</td>
+                                    <td>{{ $prova->questoes()->count() }}</td>
                                     <td style="text-align: center">
                                         <div class="btn-group-vertical" style="min-width: 50px; max-width: 80%">
-                                            <a style="border-radius: 0" href="{{ route('questoes.show', $questao->id) }}"
+                                            <a style="border-radius: 0" href="{{ route('provas.show', $prova->id) }}"
                                                class="btn btn-xs btn-primary">Ver</a>
-                                            <form action="{{ route('questoes.destroy', $questao->id) }}"
+                                            <form action="{{ route('provas.destroy', $prova->id) }}"
                                                   class="btn-group" style="margin-top: 10px;" method="post">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}
