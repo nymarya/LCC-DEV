@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Exams;
 
+use App\Assunto;
+use App\Facades\Perfil;
 use App\Http\Controllers\Controller;
 use App\Models\Questao;
+use App\Models\Turma;
 use Illuminate\Http\Request;
 
 class ProvaController extends Controller
@@ -29,34 +32,22 @@ class ProvaController extends Controller
 
     public function create(){
         return view('provas.create',[
-            'turmas' => 'aa',
-            'questoes' => 'aa',
+            'turmas' => Turma::whereNull('deleted_at')->get(),
+            'assuntos' => Assunto::with('questoes')->whereNull('deleted_at')->get(),
         ]);
     }
 
     public function store() {
         $this->validate($this->request, [
-            'questao' => ['required'],
-            'alternativas' => ['required', 'array'],
-            'alternativas.*.alternativa' => ['required'],
+            'turma_id' => ['required'],
+            'questoes' => ['required', 'array'],
         ]);
 
-        $questao = Questao::create($this->request->only('questao'));
+        $turma = Turma::findOrFail(intval($this->request->input('turma_id')));
 
-        $alternativas = collect($this->request->get('alternativas'))->map(function ($item, $key) {
-            if($item['correta'] == null){
-                $item['correta'] = false;
-            }
 
-            return $item;
-        })->toArray();
-
-        $questao->alternativas()
-            ->createMany($alternativas);
-
-        //continua na mesma tela para facilitar o cadastro de varias questoes
-        return redirect()->route('questoes.create')
-            ->with('success', 'Questão cadastrada com sucesso!');
+        return redirect()->route('provas.create')
+            ->with('success', 'Prova cadastrada com sucesso!');
 
     }
 

@@ -13,3 +13,8 @@
         <i class="fa fa-user"></i> <span>Alunos</span>
     </a>
 </li>
+<li>
+    <a href="{{ route('provas.index') }}">
+        <i class="fa fa-edit"></i> <span>Provas</span>
+    </a>
+</li>

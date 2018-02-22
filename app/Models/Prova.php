@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Assunto;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Prova extends Model
 {
@@ -27,7 +27,7 @@ class Prova extends Model
         'deleted_at',
     ];
 
-    public function assuntos(){
-        $this->hasManyThrough(Assunto::class, Bloco::class);
+    public function questoes(){
+        $this->hasManyThrough(Questao::class, Bloco::class);
     }
 }

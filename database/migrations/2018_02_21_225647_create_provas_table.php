@@ -15,10 +15,10 @@ class CreateProvasTable extends Migration
     {
         Schema::create('provas', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('aluno_id')->unsigned();
-            $table->integer('nota')->nullable();
+            $table->string('tipo');
+            $table->integer('turma_id')->unsigned();
 
-            $table->foreign('aluno_id')->references('id')->on('alunos');
+            $table->foreign('turma_id')->references('id')->on('turmas');
             $table->timestamps();
             $table->softDeletes();
         });

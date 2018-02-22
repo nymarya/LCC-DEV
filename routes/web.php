@@ -46,5 +46,7 @@ Route::group(['middleware' => ['auth', 'role']], function () {
 
     Route::group(['namespace' => 'Exams'], function () {
         Route::resource('questoes', 'QuestaoController');
+        Route::get('api/questoes', 'QuestaoController@select')->name('questoes.select');
+        Route::resource('provas', 'ProvaController');
     });
 });
