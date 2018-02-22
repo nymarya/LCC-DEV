@@ -41,36 +41,26 @@
             <div class="widget-user-header bg-blue">
                 <h3 class="widget-user-username no-margin">Provas</h3>
             </div>
-            @if(count(\App\Facades\Perfil::papel()->turmas))
-                @foreach(\App\Facades\Perfil::papel()->turmas as $turma)
-                    @if(count($turma->provas))
-                        <div class="box-footer no-padding">
-                            <table class="table no-margin table-bordered">
-                                <tbody><tr>
-                                    <th>Prova</th>
-                                    <th>Nota</th>
+            @if(count(\App\Models\Nota::where('aluno_id',\App\Facades\Perfil::papel()->id)->get()))
+                <div class="box-footer no-padding">
+                    <table class="table no-margin table-bordered">
+                        <tbody><tr>
+                            <th>Turma</th>
+                            <th>Nota</th>
 
-                                </tr>
+                        </tr>
+                        @foreach(\App\Models\Nota::where('aluno_id',\App\Facades\Perfil::papel()->id)->get() as $nota)
+                            <tr>
+                                <td>{{$nota->prova->turma->codigo}}
+                                </td>
+                                <td>{{$nota->nota}}
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
 
-                                @foreach($turma->provas as $prova)
-                                    <tr>
-                                        <td>
-                                        </td>
-                                        <td>
-                                        </td>
-                                    </tr>
-                                @endforeach
-
-                                </tbody>
-                            </table>
-                        </div>
-                    @else
-                        <div class="box-body">
-                            Não há registros disponíveis.
-                        </div>
-                    @endif
-
-                @endforeach
             @else
                 <div class="box-body">
                     Não há registros disponíveis.
