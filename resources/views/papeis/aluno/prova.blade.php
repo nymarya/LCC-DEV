@@ -7,7 +7,7 @@
 @section('content')
     <div class="row">
         <div class="col-md-12">
-            <form action="#" method="post">
+            <form action="{{route('check')}}" method="post">
                 {{ csrf_field() }}
                 <div class="box">
                     <div class="box-header">
@@ -22,7 +22,7 @@
                                 <label>
 
                                 @foreach($questao->alternativas as $alternativa)
-                                    <input type="radio"  id="{{'option'.$alternativa->id}}" name="{{'name'.$questao->id}}" value="{{'option'.$alternativa->id}}" >
+                                    <input type="radio"  id="{{'option'.$alternativa->id}}" name="{{'questao'.$questao->id}}" value="{{'option'.$alternativa->id}}" >
                                         {{$alternativa->alternativa}}<br>
                                 @endforeach
                                 </label>

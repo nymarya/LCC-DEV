@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Exams;
 use App\Assunto;
 use App\Facades\Perfil;
 use App\Http\Controllers\Controller;
+use App\Models\Alternativa;
 use App\Models\Bloco;
 use App\Models\Prova;
 use App\Models\Questao;
@@ -87,7 +88,21 @@ class ProvaController extends Controller
     public function check(){
 
         $nota = 0;
+        $acertos = 0;
 
+        $questoes = Perfil::papel()->turmas->first()->provas->first()->questoes;
+
+        $aa = [];
+
+        foreach ($questoes as $questao){
+            //recupera id da alternativa q o aluno marcou
+            $id = intval(7, strlen($this->request->input('questao'.$questao->id)));
+
+            $alternativa = Alternativa::find($id);
+            if($alternativa->correta){
+                $acertos++;
+            }
+        }
 
     }
 }
