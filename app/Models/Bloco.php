@@ -35,4 +35,12 @@ class Bloco extends Model
     protected $fillable = [
         'questao_id', 'prova_id',
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function questao()
+    {
+        return $this->belongsTo(Questao::class);
+    }
 }

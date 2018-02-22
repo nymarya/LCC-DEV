@@ -33,6 +33,9 @@ Route::group(['middleware' => ['auth', 'role']], function () {
     Route::get('verProva', function () {
         return view('papeis.aluno.prova');
     });
+    Route::get('gabarito', function () {
+        return view('papeis.aluno.gabarito');
+    });
 
     Route::resource('turmas', 'TurmaController');
     Route::get('/', 'HomeController@index');
