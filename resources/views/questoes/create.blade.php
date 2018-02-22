@@ -138,7 +138,7 @@
 @endsection
 
 @push('scripts')
-<script src="{{ asset('app.js') }}"></script>
+<script src="{{ asset('dist/js/app.js') }}"></script>
 <script src="{{ asset('dist/js/inputmask.min.js') }}"></script>
 <script>
     $(function () {

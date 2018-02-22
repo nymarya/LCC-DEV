@@ -38,6 +38,6 @@ class Turma extends Model
      */
     public function provas()
     {
-        return $this->hasMany(Prova::class)->wherePivot('deleted_at', null);
+        return $this->hasMany(Prova::class);
     }
 }
