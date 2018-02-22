@@ -43,4 +43,8 @@ Route::group(['middleware' => ['auth', 'role']], function () {
         Route::post('matricular_aluno/{id}', 'ProfessorController@matricular_aluno')->name('matricular_aluno');
         Route::get('matricula_aluno/{id}', 'ProfessorController@matricula_aluno')->name('matricula_aluno');
     });
+
+    Route::group(['namespace' => 'Exams'], function () {
+        Route::resource('questoes', 'QuestaoController');
+    });
 });

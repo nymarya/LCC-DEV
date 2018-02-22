@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateQuestaosTable extends Migration
+class ChangeAlternativaOnAlternativasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class CreateQuestaosTable extends Migration
      */
     public function up()
     {
-        Schema::create('questoes', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('questao');
-
-            $table->timestamps();
-            $table->softDeletes();
-
+        Schema::table('alternativas', function ($table) {
+            $table->string('alternativa')->change();
         });
+
     }
 
     /**
@@ -30,6 +26,8 @@ class CreateQuestaosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('questaos');
+        Schema::table('alternativas', function ($table) {
+            $table->integer('alternativa')->change();
+        });
     }
 }

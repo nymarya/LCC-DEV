@@ -26,4 +26,13 @@ class Alternativa extends Model
     protected $dates = [
         'deleted_at',
     ];
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'questao_id', 'alternativa', 'correta'
+    ];
 }
