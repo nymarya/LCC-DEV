@@ -64,7 +64,12 @@
                                 </tbody>
                             </table>
                         </div>
+                    @else
+                        <div class="box-body">
+                            Não há registros disponíveis.
+                        </div>
                     @endif
+
                 @endforeach
             @else
                 <div class="box-body">
