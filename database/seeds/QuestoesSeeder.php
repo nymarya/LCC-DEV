@@ -11,10 +11,14 @@ class QuestoesSeeder extends Seeder
      */
     public function run()
     {
-            $questao = factory(\App\Models\Questao::class,100)
+            $questao = factory(\App\Models\Questao::class,10)
                 ->create([
                     'assunto_id' => factory(\App\Assunto::class)->create()->id,
                 ])->each(function ($questao) {
+                    factory(\App\Models\Midia::class)
+                        ->create([
+                            'questao_id' => $questao->id,
+                        ]);
                     factory(\App\Models\Alternativa::class)
                         ->create([
                             'correta' => true,
