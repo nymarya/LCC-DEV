@@ -30,6 +30,10 @@ Route::post('cadastroAluno', 'Roles\AlunoController@cadastroAluno')->name('cadas
 Auth::routes();
 
 Route::group(['middleware' => ['auth', 'role']], function () {
+    Route::get('verProva', function () {
+        return view('papeis.aluno.prova');
+    });
+
     Route::resource('turmas', 'TurmaController');
     Route::get('/', 'HomeController@index');
     Route::resource('assuntos', 'AssuntoController');
