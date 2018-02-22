@@ -17,6 +17,12 @@ Questão
                         <th>Assunto</th>
                         <td>{{$questao->assunto->assunto}}</td>
                     </tr>
+                    @if($midia)
+                        <tr>
+                            <th>Mídia</th>
+                            <td><a href="{{ asset($midia->arquivo) }}">Ver</a></td>
+                        </tr>
+                    @endif
                 </table>
 
                 <div class="box-header">

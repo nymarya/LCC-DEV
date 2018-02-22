@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Exams;
 
 use App\Assunto;
 use App\Http\Controllers\Controller;
+use App\Models\Midia;
 use App\Models\Questao;
 use Illuminate\Http\Request;
 
@@ -44,6 +45,20 @@ class QuestaoController extends Controller
 
         $questao = Questao::create($this->request->only(['questao','assunto_id']));
 
+        if($this->request->file('arquivo')){
+            $this->validate($this->request, [
+                'arquivo' => [
+                    'file',
+                ],
+            ]);
+            Midia::create([
+                'arquivo'=> $this->request->file('arquivo')
+                    ->store('midias', 'public'),
+                'questao_id' => $questao->id,
+            ]);
+
+        }
+
         $alternativas = collect($this->request->get('alternativas'))->map(function ($item, $key) {
             if($item['correta'] == null){
                 $item['correta'] = false;
@@ -65,7 +80,8 @@ class QuestaoController extends Controller
         $questao = Questao::findOrFail($id);
 
         return view('questoes.show', [
-            'questao' => $questao
+            'questao' => $questao,
+            'midia' => Midia::where('questao_id',$questao->id)->first(),
         ]);
     }
 
