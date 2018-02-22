@@ -30,8 +30,10 @@ Route::post('cadastroAluno', 'Roles\AlunoController@cadastroAluno')->name('cadas
 Auth::routes();
 
 Route::group(['middleware' => ['auth', 'role']], function () {
+    Route::resource('turmas', 'TurmaController');
     Route::get('/', 'HomeController@index');
     Route::resource('planos', 'PlanoSaudeController');
+
     Route::group(['namespace' => 'Roles'], function () {
         Route::resource('administradores', 'AdministradorController');
         Route::resource('alunos', 'AlunoController');
