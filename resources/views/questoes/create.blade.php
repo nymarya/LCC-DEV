@@ -3,6 +3,9 @@
 @section('title')
     Cadastrar questão
 @endsection
+@push('stylesheets')
+    <link rel="stylesheet" href="{{asset('dist/css/avatar.css')}}">
+@endpush
 
 @section('header')
     @parent
@@ -23,6 +26,16 @@
 
                 <div class="box">
                     <div class="box-body">
+                        <div class="form-group{{ $errors->has('arquivo') ? ' has-error' : '' }}">
+                            <label for="arquivo">Arquivo</label>
+                            <input type="file" id="arquivo" name="arquivo" class="form-control">
+
+                            @if ($errors->has('arquivo'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('arquivo') }}</strong>
+                                </span>
+                            @endif
+                        </div>
                         <div class="required form-group{{ $errors->has('assunto_id') ? ' has-error' : '' }}">
                             <label for="assunto_id">Assunto</label>
                             <select class="form-control" name="assunto_id">
@@ -108,6 +121,7 @@
                                 </template>
                             </form-set>
                         </div>
+
                     </div>
 
                     <div class="box-footer">

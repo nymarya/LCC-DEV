@@ -18,7 +18,10 @@
                                         <h5 class="no-margin">{{ $diario->codigo }}</h5>
                                     </a>
                                 </td>
-                                <td></td>
+                                <td><a href="#">
+                                        <h5 class="no-margin">Iniciar</h5>
+                                    </a>
+                                </td>
                             </tr>
                         @endforeach
 
