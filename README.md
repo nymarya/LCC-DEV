@@ -1,5 +1,5 @@
 # Sistema de avaliação - LIFE CYCLE CANVAS
-Projeto final da do curso de gerenciamento de projetos
+Projeto final do curso de gerenciamento de projetos
 
 ## Resultados:
 ![TelaAdministrador](https://i.imgur.com/ErKsbYa.png)
